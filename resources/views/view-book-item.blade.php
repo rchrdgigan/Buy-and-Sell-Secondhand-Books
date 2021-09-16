@@ -7,7 +7,7 @@
     <div class="container">
         <div class="breadcrumb-content">
             <ul>
-                <li><a href="index.html">Home</a></li>
+                <li><a href="#">Home</a></li>
                 <li class="active">Book Item Information</li>
             </ul>
         </div>
@@ -21,43 +21,10 @@
             <div class="col-lg-5 col-md-6">
                 <!-- Product Details Left -->
                 <div class="product-details-left pt-60">
-                    <div class="product-details-thumbs slider-thumbs-1">
-                        <div class="p-1 sm-image"><img width="100" height="150" src="{{asset('vendor/images/product/large-size/1.jpg')}}" alt="product image thumb"></div>
-                        <div class="p-1 sm-image"><img width="100" height="150" src="{{asset('vendor/images/product/large-size/2.jpg')}}" alt="product image thumb"></div>
-                        <div class="p-1 sm-image"><img width="100" height="150" src="{{asset('vendor/images/product/large-size/1.jpg')}}" alt="product image thumb"></div>
-                        <div class="p-1 sm-image"><img width="100" height="150" src="{{asset('vendor/images/product/large-size/2.jpg')}}" alt="product image thumb"></div>
-                        <div class="p-1 sm-image"><img width="100" height="150" src="{{asset('vendor/images/product/large-size/1.jpg')}}" alt="product image thumb"></div>
-                        <div class="p-1 sm-image"><img width="100" height="150" src="{{asset('vendor/images/product/large-size/2.jpg')}}" alt="product image thumb"></div>
-                    </div>
                     <div class="product-details-images slider-navigation-1">
                         <div class="lg-image">
                             <a class="popup-img venobox vbox-item" href="images/product/large-size/1.jpg" data-gall="myGallery">
                                 <img height="500" src="{{asset('vendor/images/product/large-size/1.jpg')}}" alt="product image">
-                            </a>
-                        </div>
-                        <div class="lg-image">
-                            <a class="popup-img venobox vbox-item" href="images/product/large-size/2.jpg" data-gall="myGallery">
-                                <img height="500" src="{{asset('vendor/images/product/large-size/2.jpg')}}" alt="product image">
-                            </a>
-                        </div>
-                        <div class="lg-image">
-                            <a class="popup-img venobox vbox-item" href="images/product/large-size/1.jpg" data-gall="myGallery">
-                                <img height="500" src="{{asset('vendor/images/product/large-size/1.jpg')}}" alt="product image">
-                            </a>
-                        </div>
-                        <div class="lg-image">
-                            <a class="popup-img venobox vbox-item" href="images/product/large-size/2.jpg" data-gall="myGallery">
-                                <img height="500" src="{{asset('vendor/images/product/large-size/2.jpg')}}" alt="product image">
-                            </a>
-                        </div>
-                        <div class="lg-image">
-                            <a class="popup-img venobox vbox-item" href="images/product/large-size/1.jpg" data-gall="myGallery">
-                                <img height="500" src="{{asset('vendor/images/product/large-size/1.jpg')}}" alt="product image">
-                            </a>
-                        </div>
-                        <div class="lg-image">
-                            <a class="popup-img venobox vbox-item" href="images/product/large-size/2.jpg" data-gall="myGallery">
-                                <img height="500" src="{{asset('vendor/images/product/large-size/2.jpg')}}" alt="product image">
                             </a>
                         </div>
                     </div>
@@ -68,8 +35,8 @@
             <div class="col-lg-7 col-md-6">
                 <div class="product-details-view-content pt-60">
                     <div class="product-info">
-                        <h2>Harry Potter Book</h2>
-                        <span class="product-details-ref">Reference: Chad's Shop</span>
+                        <h2>Kill me or I kill you</h2>
+                        <span class="product-details-ref">Shop: Chad's Shop</span>
                         <div class="price-box pt-20">
                             <span class="new-price new-price-2">P 90.98</span>
                         </div>
@@ -92,6 +59,7 @@
                                     </div>
                                 </div>
                                 <a  type="submit" class="add-to-cart" href="{{route('add.cart')}}">Add to cart</a>
+                                <a  type="submit" class="add-to-cart" href="{{route('add.cart')}}">Buy Now</a>
                             </form>
                         </div>
                     </div>
@@ -108,8 +76,7 @@
             <div class="col-lg-12">
                 <div class="li-product-tab">
                     <ul class="nav li-product-menu">
-                        <li><a class="active" data-toggle="tab" href="#description"><span>Description</span></a></li>
-                        <li><a data-toggle="tab" href="#product-details"><span>Product Details</span></a></li>
+                        <li><a class="active" data-toggle="tab" href="#description"><span>Book Details</span></a></li>
                     </ul>               
                 </div>
                 <!-- Begin Li's Tab Menu Content Area -->
@@ -118,16 +85,9 @@
         <div class="tab-content">
             <div id="description" class="tab-pane active show" role="tabpanel">
                 <div class="product-description">
-                    <span>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</span>
-                </div>
-            </div>
-            <div id="product-details" class="tab-pane" role="tabpanel">
-                <div class="product-details-manufacturer">
-                    <!-- <a href="#">
-                        <img src="#" alt="Product Manufacturer Image">
-                    </a> -->
-                    <p><span>Reference</span> demo_7</p>
-                    <p><span>Reference</span> demo_7</p>
+                    <p><span>#Book Pages: 120 pages</span></p>
+                    <p><span>#Book Height-Width: 12x4</span></p>
+                    <p><span>#Book Weight: 0.3kg</span></p>
                 </div>
             </div>
         </div>

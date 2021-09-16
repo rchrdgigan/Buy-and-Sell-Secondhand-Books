@@ -27,3 +27,23 @@ Route::get('/view-book-item', function () {
 Route::get('/add-cart', function () {
     return view('add-cart');
 })->name('add.cart');
+
+Route::get('/my-purchase', function () {
+    return view('my-purchase');
+})->name('my.purchase');
+
+Route::get('/my-shop', function () {
+    return view('my-shop');
+})->name('my.shop');
+
+Route::get('/filter-categories', function () {
+    return view('filter-categories');
+})->name('filter.categories');
+
+Route::get('/filter-shop', function () {
+    return view('filter-shop');
+})->name('filter.shop');
+
+Route::get('/view-shop', function () {
+    return view('seller-shop');
+})->name('seller.shop');

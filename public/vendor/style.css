@@ -1903,7 +1903,6 @@ textarea:focus {
 	position: static !important;
 }
 .megamenu-static-holder .hb-megamenu, .megamenu-holder .hb-megamenu {
-	background-image: url(images/menu/li-bg-menu.jpg);
 	background-size: cover;
 	background-position: top;
 	background-repeat: no-repeat;

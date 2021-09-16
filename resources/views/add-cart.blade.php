@@ -39,7 +39,16 @@
                                     <td class="li-product-thumbnail"><a href="#"><img height="75" src="{{asset('vendor/images/product/large-size/2.jpg')}}"></a></td>
                                     <td class="li-product-name"><a href="#">Kill me</a></td>
                                     <td class="li-product-price"><span class="amount">100.00</span></td>
-                                    <td class="li-product-price"><span class="quantity">2</span></td>
+                                    <td class="li-product-price">
+                                        <div class="quantity">
+                                            <label>Quantity</label>
+                                            <div class="cart-plus-minus">
+                                                <input class="cart-plus-minus-box" value="1" type="text">
+                                                <div class="dec qtybutton"><i class="fa fa-angle-down"></i></div>
+                                                <div class="inc qtybutton"><i class="fa fa-angle-up"></i></div>
+                                            </div>
+                                        </div>
+                                    </td>
                                     <td class="li-product-price"><span class="amount">200.00</span></td>
                                     <td class="li-product-add-cart"><a href="#">Buy</a></td>
                                 </tr>
@@ -48,7 +57,16 @@
                                     <td class="li-product-thumbnail"><a href="#"><img height="75" src="{{asset('vendor/images/product/large-size/1.jpg')}}"></a></td>
                                     <td class="li-product-name"><a href="#">The day you said good night</a></td>
                                     <td class="li-product-price"><span class="amount">130.00</span></td>
-                                    <td class="li-product-price"><span class="quantity">2</span></td>
+                                    <td class="li-product-price">
+                                        <div class="quantity">
+                                            <label>Quantity</label>
+                                            <div class="cart-plus-minus">
+                                                <input class="cart-plus-minus-box" value="1" type="text">
+                                                <div class="dec qtybutton"><i class="fa fa-angle-down"></i></div>
+                                                <div class="inc qtybutton"><i class="fa fa-angle-up"></i></div>
+                                            </div>
+                                        </div>
+                                    </td>
                                     <td class="li-product-price"><span class="amount">260.00</span></td>
                                     <td class="li-product-add-cart"><a href="#">Buy</a></td>
                                 </tr>

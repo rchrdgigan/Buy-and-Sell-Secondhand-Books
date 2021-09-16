@@ -42,6 +42,48 @@
     <script src="{{asset('vendor/js/vendor/modernizr-2.8.3.min.js')}}"></script>
 </head>
 <body>
+    <!-- Begin Header Top Area -->
+    <div class="header-top">
+        <div class="container">
+            <div class="row">
+                <!-- Begin Header Top Left Area -->
+                <div class="col-lg-3 col-md-4">
+                    <img class="rounded-circle" src="{{asset('vendor/images/logo.png')}}" height="30">
+                    {{ config('app.name', 'Laravel') }}
+                </div>
+                <!-- Header Top Left Area End Here -->
+                <!-- Begin Header Top Right Area -->
+                <div class="col-lg-9 col-md-8">
+                    <div class="header-top-right">
+                        <ul class="ht-menu">
+                            <!-- Begin Setting Area -->
+                            <li>
+                                <div class="ht-setting-trigger"><span>Setting</span></div>
+                                <div class="setting ht-setting">
+                                    <ul class="ht-setting-list">
+                                        @if (Route::has('login'))
+                                                @auth
+                                                <li><a href="{{route('home')}}">My Account</a></li>
+                                                <li><a href="#">My Purchase</a></li>
+                                                @else
+                                                <li><a href="{{ route('login') }}">Log in</a></li>
+                                                    @if (Route::has('register'))
+                                                    <li><a href="{{ route('register') }}">Register</a></li>
+                                                    @endif
+                                                @endauth
+                                        @endif
+                                    </ul>
+                                </div>
+                            </li>
+                            <!-- Setting Area End Here -->
+                        </ul>
+                    </div>
+                </div>
+                <!-- Header Top Right Area End Here -->
+            </div>
+        </div>
+    </div>
+    <!-- Header Top Area End Here -->
 <!-- Begin Body Wrapper -->
 <div class="body-wrapper">
     <!-- Begin Header Area -->
@@ -65,16 +107,16 @@
                         <!-- Begin Header Middle Searchbox Area -->
                         <form action="#" class="hm-searchbox">
                             <select class="nice-select select-search-category">
-                                <option value="0">All</option>                         
-                                <option value="17">Romace</option>                    
-                                <option value="20">Horror</option>                     
-                                <option value="21">Love Story</option>                        
-                                <option value="22">Crime</option>                
-                                <option value="23">Drama</option>                     
-                                <option value="24">Comic book</option>                       
-                                <option value="25">Fairytale</option>                        
-                                <option value="26">Fantasy</option>
-                                <option value="26">Mystery</option>                                    
+                                <option value="All">All</option>                         
+                                <option value="Romace">Romace</option>                    
+                                <option value="Horror">Horror</option>                     
+                                <option value="Love Story">Love Story</option>                        
+                                <option value="Crime">Crime</option>                
+                                <option value="Drama">Drama</option>                     
+                                <option value="Comic book">Comic book</option>                       
+                                <option value="Fairytale">Fairytale</option>                        
+                                <option value="Fantasy">Fantasy</option>
+                                <option value="Mystery">Mystery</option>                                    
                             </select>
                             <input type="text" placeholder="Enter your search key ...">
                             <button class="li-btn" type="submit"><i class="fa fa-search"></i></button>
@@ -115,32 +157,44 @@
                                             <li><a href="{{ url('/') }}">Home</a></li>
                                             @if (Route::has('login'))
                                                     @auth
-                                                    <li><a href="{{ url('/home') }}">Home</a></li>
+                                                    <li><a href="{{route('home')}}">My Account</a></li>
                                                     <li><a href="#">My Purchase</a></li>
-                                                    <li><a href="#">My Account</a></li>
-                                                    @else
-                                                    <li><a href="{{ route('login') }}">Log in</a></li>
-
-                                                        @if (Route::has('register'))
-                                                        <li><a href="{{ route('register') }}">Register</a></li>
-                                                        @endif
                                                     @endauth
                                             @endif
                                         </ul>
                                     </li>
-                                    <li class="megamenu-holder"><a href="shop-left-sidebar.html">Best Seller</a>
+                                    <li class="megamenu-holder"><a href="#">Categories</a>
                                         <ul class="megamenu hb-megamenu">
-                                            <li><a href="shop-left-sidebar.html">Seller and Books</a>
+                                            <li><a href="#">Book Category</a>
                                                 <ul>
-                                                    <li><a href="shop-3-column.html">Polano - Book1</a></li>
+                                                    <li><a href="#">Romace</a></li>
+                                                    <li><a href="#">Horror</a></li>
+                                                    <li><a href="#">Love Story</a></li>
+                                                    <li><a href="#">Crime</a></li>
+                                                    <li><a href="#">Drama</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="#">Shop Category</a>
+                                                <ul>
+                                                    <li><a href="#">Polano's Shop</a></li>
+                                                    <li><a href="#">Polana's Shop</a></li>
+                                                    <li><a href="#">Kuya's Shop</a></li>
                                                 </ul>
                                             </li>
                                         </ul>
                                     </li>
-                                    <li><a href="about-us.html">Books</a></li>
-
-                                    <li><a href="about-us.html">About Us</a></li>
-                                    <li><a href="contact.html" class="p-3">Contact</a></li>
+                                    <li class="megamenu-holder"><a href="#">About Us</a>
+                                        <ul class="megamenu hb-megamenu">
+                                            <li><a href="#">Book - Shopping in Bulan</a>
+                                                <ul>
+                                                    <li><a href="#">Bulan Area Only</a></li>
+                                                    <li><a href="#">No Valid ID - No to Shopping</a></li>
+                                                    <li><a href="#">Start Book Bussiness</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="#">Contact</a></li>
                                 </ul>
                             </nav>
                         </div>
