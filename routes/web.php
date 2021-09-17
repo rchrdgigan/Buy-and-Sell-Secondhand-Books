@@ -29,8 +29,16 @@ Route::get('/add-cart', function () {
 })->name('add.cart');
 
 Route::get('/my-purchase', function () {
-    return view('my-purchase');
+    return view('my-purchase-pending');
 })->name('my.purchase');
+
+Route::get('/my-purchase-inprocess', function () {
+    return view('my-purchase-inprocess');
+})->name('my.purchase.process');
+
+Route::get('/my-purchase-completed', function () {
+    return view('my-purchase-completed');
+})->name('my.purchase.completed');
 
 Route::get('/my-shop', function () {
     return view('my-shop');
@@ -47,3 +55,7 @@ Route::get('/filter-shop', function () {
 Route::get('/view-shop', function () {
     return view('seller-shop');
 })->name('seller.shop');
+
+Route::get('/checkout', function () {
+    return view('billing');
+})->name('billing');

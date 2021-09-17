@@ -19,16 +19,14 @@
                     
                 </div>
                 
-                <h3 class="profile-username text-center">{{auth()->user()->name}}</h3>
-
-                <p class="text-muted text-center">Buyer Profile</p>
+                <h3 class="profile-username text-center mb-5">{{auth()->user()->name}}</h3>
 
                 <ul class="list-group list-group-unbordered mb-3">
                     <li class="list-group-item">
                     <b>Email : {{auth()->user()->email}}</b>
                     </li>
                     <li class="list-group-item">
-                    <b>Address : {{auth()->user()->email}}</b>
+                    <b>Address : Bulan, Sorsogon</b>
                     </li>
                     <li class="list-group-item">
                     <a href="#" class="btn btn-warning btn-block"><b>Update Profile Picture</b></a>
@@ -93,8 +91,6 @@
                             <label for="purok" class="p-1">Purok :</label>
                             <input id="bdate" type="text" class="@error('bdate') is-invalid @enderror form-control" 
                                     placeholder="Enter Purok" required>
-
-
 
                         </div>
                     </div>

@@ -2,28 +2,16 @@
 @extends('layouts.buyer')
 
 @section('content')
-<!-- Begin Li's Breadcrumb Area -->
-<div class="breadcrumb-area">
-    <div class="container">
-        <div class="breadcrumb-content">
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li class="active">Book Item Information</li>
-            </ul>
-        </div>
-    </div>
-</div>
-<!-- Li's Breadcrumb Area End Here -->
 <!-- content-wraper start -->
 <div class="content-wraper">
     <div class="container">
         <div class="row single-product-area">
             <div class="col-lg-5 col-md-6">
                 <!-- Product Details Left -->
-                <div class="product-details-left pt-60">
+                <div class="product-details-left">
                     <div class="product-details-images slider-navigation-1">
                         <div class="lg-image">
-                            <a class="popup-img venobox vbox-item" href="images/product/large-size/1.jpg" data-gall="myGallery">
+                            <a class="popup-img venobox vbox-item" href="" data-gall="myGallery">
                                 <img height="500" src="{{asset('vendor/images/product/large-size/1.jpg')}}" alt="product image">
                             </a>
                         </div>
@@ -33,10 +21,10 @@
             </div>
 
             <div class="col-lg-7 col-md-6">
-                <div class="product-details-view-content pt-60">
+                <div class="product-details-view-content">
                     <div class="product-info">
                         <h2>Kill me or I kill you</h2>
-                        <span class="product-details-ref">Shop: Chad's Shop</span>
+                        <span class="product-details-ref">Shop: Boi's Shop</span>
                         <div class="price-box pt-20">
                             <span class="new-price new-price-2">P 90.98</span>
                         </div>
@@ -59,7 +47,7 @@
                                     </div>
                                 </div>
                                 <a  type="submit" class="add-to-cart" href="{{route('add.cart')}}">Add to cart</a>
-                                <a  type="submit" class="add-to-cart" href="{{route('add.cart')}}">Buy Now</a>
+                                <a  type="submit" class="add-to-cart" href="{{route('billing')}}">Buy Now</a>
                             </form>
                         </div>
                     </div>

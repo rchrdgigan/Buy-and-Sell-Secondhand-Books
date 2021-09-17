@@ -5,7 +5,6 @@
     <div class="row">
         <div class="col-md-3">
             <div class="card">
-                <div class="card-body box-profile">
                 <ul class="list-group list-group-unbordered">
                     <li class="list-group-item">
                         <a href="#" class="btn btn-warning btn-block"><b>Shop Profile</b></a>
@@ -17,8 +16,6 @@
                         <a href="#" class="btn btn-warning btn-block"><b>My Books</b></a>
                     </li>
                 </ul>
-                
-              </div>
             </div>
         </div>
         <div class="col-md-9">

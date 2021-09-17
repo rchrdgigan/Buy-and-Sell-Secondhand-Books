@@ -48,9 +48,12 @@
             <div class="row">
                 <!-- Begin Header Top Left Area -->
                 <div class="col-lg-3 col-md-4">
+                <a href="{{ url('/') }}">
                     <img class="rounded-circle" src="{{asset('vendor/images/logo.png')}}" height="30">
                     {{ config('app.name', 'Laravel') }}
+                </a>
                 </div>
+                
                 <!-- Header Top Left Area End Here -->
                 <!-- Begin Header Top Right Area -->
                 <div class="col-lg-9 col-md-8">
@@ -152,18 +155,19 @@
                         <div class="hb-menu">
                             <nav>
                                 <ul>
-                                    <li class="dropdown-holder"><a href="#">Home</a>
+                                    <li class="dropdown-holder"><a href="{{ url('/') }}">Home</a>
                                         <ul class="hb-dropdown">
-                                            <li><a href="{{ url('/') }}">Home</a></li>
+                                            <li><a href="{{ url('/') }}">Main Site</a></li>
                                             @if (Route::has('login'))
                                                     @auth
                                                     <li><a href="{{route('home')}}">My Account</a></li>
-                                                    <li><a href="#">My Purchase</a></li>
+                                                    <li><a href="{{route('my.purchase')}}">My Purchase</a></li>
+                                                    <li><a href="{{route('my.shop')}}">My Shop</a></li>
                                                     @endauth
                                             @endif
                                         </ul>
                                     </li>
-                                    <li class="megamenu-holder"><a href="#">Categories</a>
+                                    <li class="megamenu-holder"><a href="{{route('filter.categories')}}">Categories</a>
                                         <ul class="megamenu hb-megamenu">
                                             <li><a href="#">Book Category</a>
                                                 <ul>

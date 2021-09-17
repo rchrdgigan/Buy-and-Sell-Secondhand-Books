@@ -2,20 +2,8 @@
 @extends('layouts.buyer')
 
 @section('content')
-<!-- Begin Li's Breadcrumb Area -->
-<div class="breadcrumb-area">
-    <div class="container">
-        <div class="breadcrumb-content">
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li class="active">Cart</li>
-            </ul>
-        </div>
-    </div>
-</div>
-<!-- Li's Breadcrumb Area End Here -->
 <!--Wishlist Area Strat-->
-<div class="wishlist-area pt-60 pb-60">
+<div class="wishlist-area pb-60">
     <div class="container">
         <div class="row">
             <div class="col-12">
@@ -50,7 +38,7 @@
                                         </div>
                                     </td>
                                     <td class="li-product-price"><span class="amount">200.00</span></td>
-                                    <td class="li-product-add-cart"><a href="#">Buy</a></td>
+                                    <td class="li-product-add-cart"><a href="{{route('billing')}}">Buy</a></td>
                                 </tr>
                                 <tr>
                                     <td class="li-product-remove"><a href="#"><i class="fa fa-times"></i></a></td>
@@ -68,7 +56,7 @@
                                         </div>
                                     </td>
                                     <td class="li-product-price"><span class="amount">260.00</span></td>
-                                    <td class="li-product-add-cart"><a href="#">Buy</a></td>
+                                    <td class="li-product-add-cart"><a href="{{route('billing')}}">Buy</a></td>
                                 </tr>
                             </tbody>
                         </table>

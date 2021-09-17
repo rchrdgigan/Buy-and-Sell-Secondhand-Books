@@ -69,7 +69,7 @@
                                         <div class="product_desc_info">
                                             <div class="product-review">
                                                 <h5 class="manufacturer">
-                                                    <a href="{{route('seller.shop')}}">Chad's Shop</a>
+                                                    <a href="{{route('seller.shop')}}">Boi's Shop</a>
                                                 </h5>
                                             </div>
                                             <h4><a class="product_name" href="{{route('view.book.item')}}">Kill me or I kill you</a></h4>
@@ -108,7 +108,7 @@
                                         <div class="product_desc_info">
                                             <div class="product-review">
                                                 <h5 class="manufacturer">
-                                                    <a href="{{route('seller.shop')}}">Chad's Shop</a>
+                                                    <a href="{{route('seller.shop')}}">Boi's Shop</a>
                                                 </h5>
                                             </div>
                                             <h4><a class="product_name" href="{{route('view.book.item')}}">The day you said Goodnight</a></h4>
@@ -170,7 +170,7 @@
                                                 <div class="product_desc_info">
                                                     <div class="product-review">
                                                         <h5 class="manufacturer">
-                                                            <a href="{{route('seller.shop')}}">Chad's Shop</a>
+                                                            <a href="{{route('seller.shop')}}">Boi's Shop</a>
                                                         </h5>
                                                     </div>
                                                     <h4><a class="product_name" href="{{route('view.book.item')}}">The day you said Goodnight</a></h4>
@@ -209,7 +209,7 @@
                                                 <div class="product_desc_info">
                                                     <div class="product-review">
                                                         <h5 class="manufacturer">
-                                                            <a href="{{route('seller.shop')}}">Chad's Shop</a>
+                                                            <a href="{{route('seller.shop')}}">Boi's Shop</a>
                                                         </h5>
                                                     </div>
                                                     <h4><a class="product_name" href="{{route('view.book.item')}}">Kill me or I kill you</a></h4>
@@ -247,7 +247,7 @@
                                                 <div class="product_desc_info">
                                                     <div class="product-review">
                                                         <h5 class="manufacturer">
-                                                            <a href="{{route('seller.shop')}}">Chad's Shop</a>
+                                                            <a href="{{route('seller.shop')}}">Boi's Shop</a>
                                                         </h5>
                                                     </div>
                                                     <h4><a class="product_name" href="{{route('view.book.item')}}">Kill me or I kill you</a></h4>

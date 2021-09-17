@@ -2,20 +2,8 @@
 @extends('layouts.buyer')
 
 @section('content')
-<!-- Begin Li's Breadcrumb Area -->
-<div class="breadcrumb-area">
-    <div class="container">
-        <div class="breadcrumb-content">
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li class="active">Shop List</li>
-            </ul>
-        </div>
-    </div>
-</div>
-<!-- Li's Breadcrumb Area End Here -->
 <!-- Begin Li's Content Wraper Area -->
-<div class="content-wraper pt-60 pb-60">
+<div class="content-wraper pb-60">
     <div class="container">
         <div class="row">
             <div class="col-lg-9 order-1 order-lg-2">
@@ -62,7 +50,7 @@
                                                 <div class="product_desc_info">
                                                     <div class="product-review">
                                                         <h5 class="manufacturer">
-                                                            <a href="#">Chad's Shop</a>
+                                                            <a href="#">Boi's Shop</a>
                                                         </h5>
                                                     </div>
                                                     <h4><a class="product_name" href="{{route('view.book.item')}}">Kill me or I kill you</a></h4>
@@ -108,10 +96,18 @@
                 <!-- shop-products-wrapper end -->
             </div>
             <div class="col-lg-3 order-2 order-lg-1">
+                <div class="sidebar-categores-box text-center">
+                <ul>
+                    <li><a href=""><img height="100" width="100" src="{{asset('vendor/images/product/large-size/1.jpg')}}" class="rounded-circle mb-2" alt="" /></a></li>
+                    <h3>Boi's Shop</h3>
+                    <li><a href="">Name: Oscar Jay Mino</a></li>
+                    <li><a href="">Email: oscarj_mino@email.com</a></li>
+                </ul>
+                </div>  
                 <!--sidebar-categores-box start  -->
                 <div class="sidebar-categores-box">
                     <div class="sidebar-title">
-                        <h2>Chad's Shop</h2>
+                        <h2>My Books</h2>
                     </div>
                     <!-- filter-sub-area start -->
                     <div class="filter-sub-area">

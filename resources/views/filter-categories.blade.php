@@ -2,20 +2,8 @@
 @extends('layouts.buyer')
 
 @section('content')
-<!-- Begin Li's Breadcrumb Area -->
-<div class="breadcrumb-area">
-    <div class="container">
-        <div class="breadcrumb-content">
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li class="active">Book List</li>
-            </ul>
-        </div>
-    </div>
-</div>
-<!-- Li's Breadcrumb Area End Here -->
 <!-- Begin Li's Content Wraper Area -->
-<div class="content-wraper pt-60 pb-60">
+<div class="content-wraper pb-60">
     <div class="container">
         <div class="row">
             <div class="col-lg-9 order-1 order-lg-2">
@@ -62,7 +50,7 @@
                                                 <div class="product_desc_info">
                                                     <div class="product-review">
                                                         <h5 class="manufacturer">
-                                                            <a href="#">Chad's Shop</a>
+                                                            <a href="#">Boi's Shop</a>
                                                         </h5>
                                                     </div>
                                                     <h4><a class="product_name" href="{{route('view.book.item')}}">Kill me or I kill you</a></h4>
@@ -139,7 +127,7 @@
                         <div class="categori-checkbox">
                             <form action="#">
                                 <ul>
-                                    <li><a href="#">Chad's Shop(2)</a></li>
+                                    <li><a href="#">Boi's Shop(2)</a></li>
                                 </ul>
                             </form>
                         </div>
