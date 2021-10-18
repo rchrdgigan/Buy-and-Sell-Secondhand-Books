@@ -53,7 +53,7 @@
                                                             <a href="#">Boi's Shop</a>
                                                         </h5>
                                                     </div>
-                                                    <h4><a class="product_name" href="{{route('view.book.item')}}">Kill me or I kill you</a></h4>
+                                                    <h4><a class="product_name" href="">Kill me or I kill you</a></h4>
                                                     <div class="price-box">
                                                         <span class="new-price">₱ 86.80</span>
                                                     </div>

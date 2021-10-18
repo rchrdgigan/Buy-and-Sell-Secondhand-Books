@@ -4,10 +4,22 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
+            @if(Session::get('fail'))
+                <div class="alert alert-danger">
+                    <strong>{{ Session::get('fail') }}</strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            @endif
             <div class="text-center mt-5">
                 <img class="mb-4 rounded-circle" src="{{asset('vendor/images/logo.png')}}" height="150">
             </div>
-            <form class="form-signin" method="POST" action="{{ route('login') }}">
+            @isset($url)
+            <form method="POST" class="form-signin" action='{{ url("login/$url") }}' aria-label="{{ __('Login') }}">
+            @else
+            <form method="POST" class="form-signin" action="{{ route('login') }}" aria-label="{{ __('Login') }}">
+            @endisset
                 @csrf
                 <div class="form-group row">
                     <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>

@@ -53,15 +53,15 @@
                                                             <a href="#">Boi's Shop</a>
                                                         </h5>
                                                     </div>
-                                                    <h4><a class="product_name" href="{{route('view.book.item')}}">Kill me or I kill you</a></h4>
+                                                    <h4><a class="product_name" href="#">Kill me or I kill you</a></h4>
                                                     <div class="price-box">
                                                         <span class="new-price">₱ 86.80</span>
                                                     </div>
                                                 </div>
                                                 <div class="add-actions">
                                                     <ul class="add-actions-link">
-                                                        <li class="add-cart active"><a href="#">Add to cart</a></li>
-                                                        <li><a href="#" title="quick view" class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-eye"></i></a></li>
+                                                        <li class="add-cart active"><a href="">Add to cart</a></li>
+                                                        <li><a href="#" title="quick view" class="quick-view-btn"><i class="fa fa-eye"></i></a></li>
                                                     </ul>
                                                 </div>
                                             </div>

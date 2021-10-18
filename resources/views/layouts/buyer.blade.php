@@ -40,6 +40,12 @@
     <link rel="stylesheet" href="{{asset('vendor/css/responsive.css')}}">
     <!-- Modernizr js -->
     <script src="{{asset('vendor/js/vendor/modernizr-2.8.3.min.js')}}"></script>
+
+    <!-- summernote -->
+    <link rel="stylesheet" href="{{ asset('vendor/plugins/summernote/summernote-bs4.min.css') }}">
+    <!-- CodeMirror -->
+    <link rel="stylesheet" href="{{ asset('vendor/plugins/codemirror/codemirror.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendor/plugins/codemirror/theme/monokai.css') }}">
 </head>
 <body>
     <!-- Begin Header Top Area -->
@@ -111,15 +117,26 @@
                         <form action="#" class="hm-searchbox">
                             <select class="nice-select select-search-category">
                                 <option value="All">All</option>                         
-                                <option value="Romace">Romace</option>                    
-                                <option value="Horror">Horror</option>                     
-                                <option value="Love Story">Love Story</option>                        
-                                <option value="Crime">Crime</option>                
-                                <option value="Drama">Drama</option>                     
-                                <option value="Comic book">Comic book</option>                       
-                                <option value="Fairytale">Fairytale</option>                        
-                                <option value="Fantasy">Fantasy</option>
-                                <option value="Mystery">Mystery</option>                                    
+                                <option value="Mathematics">Mathematics</option>
+                                <option value="English">English</option>
+                                <option value="Science">Science</option>
+                                <option value="Filipino">Filipino</option>
+                                <option value="Literature & Fiction">Literature & Fiction</option>
+                                <option value="Arts & Music">Arts & Music</option>
+                                <option value="Comics">Comics</option>
+                                <option value="Biographies">Biographies</option>
+                                <option value="Mysteries">Mysteries</option>
+                                <option value="Sports">Sports</option>
+                                <option value="Medical">Medical</option>
+                                <option value="Business">Business</option>
+                                <option value="Cooking">Cooking</option>
+                                <option value="Comp & Tech">Comp & Tech</option>
+                                <option value="Education & Reference">Education & Reference</option>
+                                <option value="Sci-Fi & Fantasy">Sci-Fi & Fantasy</option>
+                                <option value="Entertainment">Entertainment</option>
+                                <option value="Health & Fitness">Health & Fitness</option>
+                                <option value="Health & Fitness">Horror</option>
+                                <option value="Health & Fitness">Romance</option>                                  
                             </select>
                             <input type="text" placeholder="Enter your search key ...">
                             <button class="li-btn" type="submit"><i class="fa fa-search"></i></button>
@@ -127,14 +144,11 @@
                         <!-- Header Middle Searchbox Area End Here -->
                         <!-- Begin Header Middle Right Area -->
                         <div class="header-middle-right">
+                        
                             <ul class="hm-menu">
                                 <!-- Begin Header Mini Cart Area -->
                                 <li class="hm-minicart">
-                                    <div class="hm-minicart-trigger">
-                                        <span class="item-icon"></span>
-                                        <span class="item-text">Cart
-                                        </span>
-                                    </div>
+                                   <a href="{{route('cart')}}" style="margin-right:70px; line-height:5px;"><span class="item-icon text-danger col-12"></span> <i class="bg-danger text-white rounded">CART</i></a> 
                                 </li>
                                 <!-- Header Mini Cart Area End Here -->
                             </ul>
@@ -257,7 +271,6 @@
                                 <h3 class="footer-block-title">Product</h3>
                                 <ul>
                                     <li><a href="#">Prices drop</a></li>
-                                    <li><a href="#">New products</a></li>
                                     <li><a href="#">Best sales</a></li>
                                     <li><a href="#">Contact us</a></li>
                                 </ul>
@@ -348,5 +361,36 @@
         <script src="{{asset('vendor/js/scrollUp.min.js')}}"></script>
         <!-- Main/Activator js -->
         <script src="{{asset('vendor/js/main.js')}}"></script>
+
+        <!-- Summernote -->
+        <script src="{{ asset('vendor/plugins/summernote/summernote-bs4.min.js') }}"></script>
+        <!-- CodeMirror -->
+        <script src="{{ asset('vendor/plugins/codemirror/codemirror.js') }}"></script>
+        <script src="{{ asset('vendor/plugins/codemirror/mode/css/css.js') }}"></script>
+        <script src="{{ asset('vendor/plugins/codemirror/mode/xml/xml.js') }}"></script>
+        <script src="{{ asset('vendor/plugins/codemirror/mode/htmlmixed/htmlmixed.js') }}"></script>
+
+        <script>
+            $(function () {
+                //Initialize Summernote
+                $('#summernote').summernote({placeholder: 'Example Note', tabsize: 2, height: 100,});
+            });
+        </script>
+
+        <script>
+             $(document).on("click", ".open-AddBookDialog", function () {
+                var myCartId = $(this).data('id');
+                $(".modal-body #cartId").val( myCartId );
+              });
+        </script>
+
+        <script>
+        $('#delCart').on('show.bs.modal', function (e) {
+        var opener=e.relatedTarget;
+        var id=$(opener).attr('id');
+        $('#delete_frm').find('[name="id"]').val(id);
+        });
+        </script>
+       
 </body>
 </html>

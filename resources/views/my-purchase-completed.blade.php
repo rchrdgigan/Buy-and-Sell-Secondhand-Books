@@ -18,9 +18,6 @@
                     <li class="list-group-item">
                         <a href="#" class="btn btn-warning btn-block"><b>Canceled Order</b></a>
                     </li>
-                    <li class="list-group-item">
-                        <a href="#" class="btn btn-warning btn-block"><b>Refunded Order</b></a>
-                    </li>
                 </ul>
             </div>
         </div>
