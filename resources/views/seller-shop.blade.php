@@ -18,17 +18,6 @@
                             <!-- shop-item-filter-list end -->
                         </div>
                     </div>
-                    <!-- product-select-box start -->
-                    <div class="product-select-box">
-                        <div class="product-short">
-                            <p>Sort By:</p>
-                            <select class="nice-select">
-                                <option value="sales">Name (A - Z)</option>
-                                <option value="sales">Name (Z - A)</option>
-                            </select>
-                        </div>
-                    </div>
-                    <!-- product-select-box end -->
                 </div>
                 <!-- shop-top-bar end -->
                 <!-- shop-products-wrapper start -->
@@ -37,99 +26,129 @@
                         <div id="grid-view" class="tab-pane fade active show" role="tabpanel">
                             <div class="product-area shop-product-area">
                                 <div class="row">
+                                @foreach($book as $data)
                                     <div class="col-lg-4 col-md-4 col-sm-6 mt-40">
                                         <!-- single-product-wrap start -->
                                         <div class="single-product-wrap">
                                             <div class="product-image">
-                                                <a href="#">
-                                                    <img height="300" src="{{asset('vendor/images/product/large-size/1.jpg')}}" alt="Li's Product Image">
+                                                <a href="{{route('view.book.item',$data->id)}}">
+                                                    <img height="300" src="/storage/book_image/{{$data->image}}" alt="Li's Product Image">
                                                 </a>
-                                                <span class="sticker">New</span>
                                             </div>
                                             <div class="product_desc">
                                                 <div class="product_desc_info">
                                                     <div class="product-review">
                                                         <h5 class="manufacturer">
-                                                            <a href="#">Boi's Shop</a>
+                                                            <a href="{{route('filter.shop.name',$data->shop_name)}}">{{$data->shop_name}}</a>
                                                         </h5>
                                                     </div>
-                                                    <h4><a class="product_name" href="#">Kill me or I kill you</a></h4>
+                                                    <h4><a class="product_name" href="{{route('view.book.item',$data->id)}}">{{$data->name}}</a></h4>
                                                     <div class="price-box">
-                                                        <span class="new-price">₱ 86.80</span>
+                                                        <span class="new-price">₱ {{$data->unit_price}}</span>
                                                     </div>
                                                 </div>
                                                 <div class="add-actions">
                                                     <ul class="add-actions-link">
                                                         <li class="add-cart active"><a href="">Add to cart</a></li>
-                                                        <li><a href="#" title="quick view" class="quick-view-btn"><i class="fa fa-eye"></i></a></li>
+                                                        <li><a href="{{route('view.book.item',$data->id)}}" title="quick view" class="quick-view-btn"><i class="fa fa-eye"></i></a></li>
                                                     </ul>
                                                 </div>
                                             </div>
                                         </div>
                                         <!-- single-product-wrap end -->
                                     </div>
+                                @endforeach
                                 </div>
                             </div>
                         </div>
-
-                        <div class="paginatoin-area mb-2">
-                            <div class="row">
-                                <div class="col-lg-6 col-md-6">
-                                    <p>Showing 1-12 of 13 item(s)</p>
-                                </div>
-                                <div class="col-lg-6 col-md-6">
-                                    <ul class="pagination-box">
-                                        <li><a href="#" class="Previous"><i class="fa fa-chevron-left"></i> Previous</a>
-                                        </li>
-                                        <li class="active"><a href="#">1</a></li>
-                                        <li><a href="#">2</a></li>
-                                        <li><a href="#">3</a></li>
-                                        <li>
-                                            <a href="#" class="Next"> Next <i class="fa fa-chevron-right"></i></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
+                        <!--  -->
                     </div>
                 </div>
                 <!-- shop-products-wrapper end -->
             </div>
             <div class="col-lg-3 order-2 order-lg-1">
+                
                 <div class="sidebar-categores-box text-center">
-                <ul>
-                    <li><a href=""><img height="100" width="100" src="{{asset('vendor/images/product/large-size/1.jpg')}}" class="rounded-circle mb-2" alt="" /></a></li>
-                    <h3>Boi's Shop</h3>
-                    <li><a href="">Name: Oscar Jay Mino</a></li>
-                    <li><a href="">Email: oscarj_mino@email.com</a></li>
-                </ul>
+                @foreach($shop_name->take(1) as $udata)
+                @forelse($udata->user_shop->take(1) as $u1)
+                @foreach($users->where('id',$u1->user_id)->take(1) as $user)
+                    <div class="row ml-2">
+                        <div class="input-group-prepend float-left">
+                        <button type="button" class="btn dropdown-toggle btn-sm" data-toggle="dropdown" aria-expanded="false">
+                            Action
+                        </button>
+                        <div class="dropdown-menu" style="">
+                            <a class="dropdown-item btn-sm" href="#"> Report Shop</a>
+                        </div>
+                        </div>
+                    </div>
+                    <ul>
+                        <li><a href=""><img height="150" width="150" src="/storage/users_image/{{$user->image}}" class="rounded-circle mb-2" alt="" /></a></li>
+                        <h3>{{$udata->name}}</h3>
+                        <li><a href="">Name: {{$user->first_name}}  {{$user->middle_name}} {{$user->last_name}}</a></li>
+                        <li><a href="">Email: {{$user->email}}</a></li>
+                    </ul>
+                    @endforeach
+                    @empty
+                @endforelse
+                @endforeach
                 </div>  
                 <!--sidebar-categores-box start  -->
                 <div class="sidebar-categores-box">
-                    <div class="sidebar-title">
-                        <h2>My Books</h2>
-                    </div>
                     <!-- filter-sub-area start -->
                     <div class="filter-sub-area">
                     <!-- filter-sub-area start -->
                     <div class="filter-sub-area pt-sm-10 pt-xs-10">
-                        <h5 class="filter-sub-titel">Categories</h5>
+                        <h5 class="filter-sub-titel">My Categories</h5>
                         <div class="categori-checkbox">
-                            <form action="#">
+                            @foreach($shop_name->take(1) as $udata)
+                                @foreach($shop_book_cat as $rp)
                                 <ul>
-                                    <li><a href="#">Romace (6)</a></li>
-                                    <li><a href="#">Horror (10)</a></li>
-                                    <li><a href="#">Love Story (6)</a></li>
-                                    <li><a href="#">Crime (10)</a></li>
-                                    <li><a href="#">Drama (6)</a></li>
-                                    <li><a href="#">Comic book (10)</a></li>
-                                    <li><a href="#">Fairytale (6)</a></li>
+                                    @forelse($rp->shop_book_category->where('shop_id',$udata->id)->take(1) as $xb)
+                                    <li><a href="{{route('filter.shop.book',[$udata->name,$rp->category_title,$xb->shop_id])}}">{{$rp->category_title}} ({{$xb->where('category_id',$rp->id)->where('shop_id',$udata->id)->count()}})</a></li>
+                                    @empty
+                                    
+                                    @endforelse
                                 </ul>
-                            </form>
+                                @endforeach
+                            @endforeach
+                        </div>
+                    </div>
+                    <!-- filter-sub-area end -->
+                    <!-- filter-sub-area start -->
+                    <div class="filter-sub-area pt-sm-10 pt-xs-10">
+                    <h5 class="filter-sub-titel">Other Categories</h5>
+                        <div class="categori-checkbox">
+                            @foreach($category as $d2)
+                            <ul>
+                                @forelse($d2->assign_book_category->take(1) as $c1)
+                                <li><a href="{{route('filter.categories.name',$d2->category_title)}}">{{$d2->category_title}} ({{$c1->where('category_id',$d2->id)->count()}})</a></li>
+                                @empty
+                                
+                                @endforelse
+                            </ul>
+                            @endforeach
+                        </div>
+                    </div>
+                    <!-- filter-sub-area end -->
+                    <!-- filter-sub-area start -->
+                    <div class="filter-sub-area pt-sm-10 pt-xs-10">
+                    <h5 class="filter-sub-titel">Other Shops</h5>
+                        <div class="categori-checkbox">
+                            @foreach($shop as $d3)
+                            <ul>
+                                @forelse($d3->shop_book->take(1) as $c2)
+                                <li><a href="{{route('filter.shop.name',$d3->name)}}">{{$d3->name}} ({{$c2->where('shop_id',$d3->id)->count()}})</a></li>
+                                @empty
+                                
+                                @endforelse
+                            </ul>
+                            @endforeach
                         </div>
                     </div>
                     <!-- filter-sub-area end -->
                 </div>
+                
             </div>
         </div>
     </div>

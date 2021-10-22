@@ -7,7 +7,7 @@
             <div class="card">
                 <ul class="list-group list-group-unbordered">
                     <li class="list-group-item">
-                        <a href="{{route('my.purchase')}}" class="btn btn-warning btn-block"><b>Completed Order</b></a>
+                        <a href="{{route('my.purchase')}}" class="btn btn-warning btn-block"><b>Pending Order</b></a>
                     </li>
                     <li class="list-group-item">
                         <a href="{{route('my.purchase.process')}}" class="btn btn-warning btn-block"><b>In-process Order</b></a>
@@ -16,7 +16,7 @@
                         <a href="{{route('my.purchase.completed')}}" class="btn btn-warning btn-block"><b>Completed Order</b></a>
                     </li>
                     <li class="list-group-item">
-                        <a href="#" class="btn btn-warning btn-block"><b>Canceled Order</b></a>
+                        <a href="{{route('my.purchase.canceled')}}" class="btn btn-warning btn-block"><b>Canceled Order</b></a>
                     </li>
                 </ul>
             </div>
@@ -38,32 +38,21 @@
                             </tr>
                         </thead>
                         <tbody>
+                        @foreach($user_order->where('status','finish') as $data)   
                             <tr>
-                                <td><a href="#"><img height="75" src="{{asset('vendor/images/product/large-size/2.jpg')}}"></a></td>
-                                <td><a href="#">Kill me</a></td>
-                                <td><span class="amount">100.00</span></td>
-                                <td><span class="amount">2</span></td>
-                                <td><span class="amount">200.00</span></td>
-                                <td><span class="amount bg-success text-white p-1 rounded">finish</span></td>
+                                <td><a href="#"><img height="75" src="/storage/book_image/{{$data->image}}"></a></td>
+                                <td><a href="#">{{$data->book_title}}</a></td>
+                                <td><span class="amount">{{$data->unit_price}}</span></td>
+                                <td><span class="amount">{{$data->quantity}}</span></td>
+                                <td><span class="amount">{{$data->total_price}}</span></td>
+                                <td><span class="amount bg-success text-white rounded">finish</span></td>
                                 <td>
-                                    <a type="button" class="btn btn-primary">
+                                    <a type="button" class="btn btn-primary btn-sm">
                                         View
                                     </a>
                                 </td>
                             </tr>
-                            <tr>
-                                <td><a href="#"><img height="75" src="{{asset('vendor/images/product/large-size/1.jpg')}}"></a></td>
-                                <td><a href="#">The day you said good night</a></td>
-                                <td><span class="amount">130.00</span></td>
-                                <td><span class="amount">2</span></td>
-                                <td><span class="amount">260.00</span></td>
-                                <td><span class="amount bg-success text-white p-1 rounded">finish</span></td>
-                                <td>
-                                    <a type="button" class="btn btn-primary">
-                                        View
-                                    </a>
-                                </td>
-                            </tr>
+                        @endforeach
                         </tbody>
                     </table>
                 </div>

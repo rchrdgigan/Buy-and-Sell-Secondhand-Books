@@ -2,6 +2,18 @@
 @extends('layouts.buyer')
 
 @section('content')
+<div class="row">
+    <div class="col-10 text-center mx-auto">
+    @if(session('message'))
+        <div class="alert alert-success alert-dismissible">
+            {{ session('message') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
+    </div>
+</div>
 <!-- content-wraper start -->
 <div class="content-wraper">
     <div class="container">
@@ -34,16 +46,18 @@
                         <div><span class="bg-warning rounded p-1">{{$data->quantity}}pcs - Available</span>
                         </div>
                         <div class="single-add-to-cart">
-                            <form action="#" class="cart-quantity">
+                            <form action="{{route('billing',$data->id)}}" method="POST" class="cart-quantity">
+                                @csrf
                                 <div class="quantity">
                                     <label>Quantity</label>
                                     <div class="cart-plus-minus mb-2">
-                                        <input class="cart-plus-minus-box" value="1" type="text">
+                                        <input name="quantity" class="cart-plus-minus-box" value="1" type="text">
                                         <div class="dec qtybutton"><i class="fa fa-angle-down"></i></div>
                                         <div class="inc qtybutton"><i class="fa fa-angle-up"></i></div>
                                     </div>
                                 </div>
-                                <a  type="submit" class="add-to-cart col-sm-12 col-lg-4 text-center" href="{{route('billing')}}">Buy Now</a>
+                                <a type="button" class="add-to-cart col-sm-12 col-lg-4 m-1 text-center" href="{{route('add.cart',$data->id)}}">Add to cart</a>
+                                <button type="submit" class="add-to-cart col-sm-12 col-lg-4 m-1 text-center">Buy Now</button>
                             </form>
                         </div>
                     </div>
@@ -103,7 +117,7 @@
                                         @foreach($same_data->shop_book as $sub_data)
                                         <div class="product-review">
                                             <h5 class="manufacturer">
-                                                <a href="{{route('seller.shop')}}">{{$sub_data->shop_name}}</a>
+                                                <a href="{{route('filter.shop.name',$sub_data->shop_name)}}">{{$sub_data->shop_name}}</a>
                                             </h5>
                                         </div>
                                         @endforeach

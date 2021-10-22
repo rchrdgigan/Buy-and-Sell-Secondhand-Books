@@ -2,14 +2,20 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\auth\LoginController;
-use App\Http\Controllers\{UserController,HomeController,BookController,ShopController,MainController};
+use App\Http\Controllers\{
+    UserController,
+    HomeController,
+    BookController,
+    ShopController,
+    MainController,
+    PurchaseController
+};
 
 Route::get('/', function () {
     return view('welcome');
 });
 
 Auth::routes();
-
 //Display Book In Main Page
 Route::get('/', [MainController::class, 'mainPageBooks'])->name('welcome');
 
@@ -52,51 +58,39 @@ Route::group(['middleware' => 'auth'], function () {
         //Shop
         Route::get('/my-shop', [ShopController::class, 'index'])->name('my.shop');
         Route::post('/shop/info', [ShopController::class, 'shopInfo'])->name('shop.info');
-
+        //add to cart and remove
         Route::get('/add-cart/{id}', [ShopController::class, 'cartShopping'])->name('add.cart');
         Route::get('/cart', [ShopController::class, 'diplayShopping'])->name('cart');
         Route::delete('/delete-cart', [ShopController::class, 'delShopping'])->name('del.cart');
+        //chechout
+        Route::post('/checkout/{id}', [MainController::class, 'checkoutBooks'])->name('billing');
+        //chechout cart
+        Route::post('/cart/checkout', [ShopController::class, 'checkoutCart'])->name('cart.buy');
+        //buy book
+        Route::post('/buy/book', [ShopController::class, 'addTransaction'])->name('buy.book');
+        Route::get('/transaction/succeeded', function () {
+            return view('order-succeeded');
+        })->name('book.transaction');
+        Route::get('/transaction/not/allowed', function () {
+            return view('order-not-allow');
+        })->name('book.not.allowed');
+        //Show list of transaction
+        Route::put('/my-purchase/canceled', [PurchaseController::class, 'cancelBook'])->name('cancel.purchase');
+        Route::get('/my-purchase', [PurchaseController::class, 'displayPending'])->name('my.purchase');
+        Route::get('/my-purchase/cancel/list', [PurchaseController::class, 'displayCanceled'])->name('my.purchase.canceled');
+        Route::get('/my-purchase-inprocess', [PurchaseController::class, 'displayInprocess'])->name('my.purchase.process');
+        Route::get('/my-purchase-completed', [PurchaseController::class, 'displayFinish'])->name('my.purchase.completed');
+
+        //Show Customer
+        Route::get('/myshop/customer', [ShopController::class, 'showCustomer'])->name('view.customer.list');
+        Route::put('/myshop/transaction/approved', [ShopController::class, 'inprocessBook'])->name('transaction.processing');
+        Route::get('/myshop/transaction/history', [ShopController::class, 'displayInprocess'])->name('display.processing');
 
     });
 });
-
-Route::get('/myshop/customer', function () {
-    return view('my-customer-list');
-})->name('view.customer.list');
-
-Route::get('/test', function () {
-    return view('add-book');
-});
-
 Route::get('/view-book-item/{id}', [MainController::class, 'buyBooks'])->name('view.book.item');
-
-
-
-Route::get('/my-purchase', function () {
-    return view('my-purchase-pending');
-})->name('my.purchase');
-
-Route::get('/my-purchase-inprocess', function () {
-    return view('my-purchase-inprocess');
-})->name('my.purchase.process');
-
-Route::get('/my-purchase-completed', function () {
-    return view('my-purchase-completed');
-})->name('my.purchase.completed');
-
-
-Route::get('/filter-categories', function () {
-    return view('filter-categories');
-})->name('filter.categories');
-
-Route::get('/filter-shop', function () {
-    return view('filter-shop');
-})->name('filter.shop');
-
-Route::get('/view-shop', function () {
-    return view('seller-shop');
-})->name('seller.shop');
-
-Route::get('/checkout', function () {
-    return view('billing');
-})->name('billing');
+Route::get('/filter-categories', [MainController::class, 'allBooks'])->name('filter.categories');
+Route::get('/filter-categories/{name}', [MainController::class, 'bookCategory'])->name('filter.categories.name');
+Route::get('/filter-shop/{name}', [MainController::class, 'shopCategory'])->name('filter.shop.name');
+Route::get('/filter-shop-book/{name}/{parm1}/{parm2}', [MainController::class, 'shopBookCategory'])->name('filter.shop.book');
+Route::get('/sorting-categories/{name}', [MainController::class, 'bookSort'])->name('sorting.book');

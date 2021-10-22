@@ -126,6 +126,38 @@
      $(".modal-body #bookId").val( myBookId );
     });
 
+    $('#cancelBok').on('show.bs.modal', function (e) {
+        var opener=e.relatedTarget;
+        var id=$(opener).attr('id');
+        $('#cancel_frm').find('[name="trans_id"]').val(id);
+    });
+
+    $('#viewBook').on('show.bs.modal', function (e) {
+        var opener=e.relatedTarget;
+        var id=$(opener).attr('id');
+        var book_title=$(opener).attr('book_title');
+        var unit_price=$(opener).attr('price');
+        var quantity=$(opener).attr('quantity');
+        var total=$(opener).attr('total');
+        var status=$(opener).attr('status');
+        var available=$(opener).attr('available');
+        var details=$(opener).attr('details');
+        var description=$(opener).attr('description');
+        var imgsrc=$(opener).attr('image');
+
+        $('#approved_frm').find('[name="trans_id"]').val(id);
+
+        document.getElementById('book_title').innerHTML = book_title;
+        document.getElementById('unit_price').innerHTML = unit_price;
+        document.getElementById('quantity').innerHTML = quantity;
+        document.getElementById('total_price').innerHTML = total;
+        document.getElementById('status').innerHTML = status;
+        document.getElementById('available').innerHTML = available;
+        document.getElementById('details').innerHTML = details;
+        document.getElementById('description').innerHTML = description;
+        $('#image').attr('src',imgsrc);
+
+    });
 
     $(document).ready(function() {
         $('#summernoteDescription').summernote();

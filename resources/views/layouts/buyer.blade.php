@@ -117,10 +117,6 @@
                         <form action="#" class="hm-searchbox">
                             <select class="nice-select select-search-category">
                                 <option value="All">All</option>                         
-                                <option value="Mathematics">Mathematics</option>
-                                <option value="English">English</option>
-                                <option value="Science">Science</option>
-                                <option value="Filipino">Filipino</option>
                                 <option value="Literature & Fiction">Literature & Fiction</option>
                                 <option value="Arts & Music">Arts & Music</option>
                                 <option value="Comics">Comics</option>
@@ -135,6 +131,10 @@
                                 <option value="Sci-Fi & Fantasy">Sci-Fi & Fantasy</option>
                                 <option value="Entertainment">Entertainment</option>
                                 <option value="Health & Fitness">Health & Fitness</option>
+                                <option value="Mathematics">Mathematics</option>
+                                <option value="English">English</option>
+                                <option value="Science">Science</option>
+                                <option value="Filipino">Filipino</option>
                                 <option value="Health & Fitness">Horror</option>
                                 <option value="Health & Fitness">Romance</option>                                  
                             </select>
@@ -148,7 +148,9 @@
                             <ul class="hm-menu">
                                 <!-- Begin Header Mini Cart Area -->
                                 <li class="hm-minicart">
-                                   <a href="{{route('cart')}}" style="margin-right:70px; line-height:5px;"><span class="item-icon text-danger col-12"></span> <i class="bg-danger text-white rounded">CART</i></a> 
+                                   <a href="{{route('cart')}}" style="margin-right:70px; line-height:5px;"><span class="item-icon text-danger col-12"></span> 
+                                    <i class="bg-danger text-white rounded">CART</i>
+                                    </a> 
                                 </li>
                                 <!-- Header Mini Cart Area End Here -->
                             </ul>
@@ -184,20 +186,10 @@
                                     <li class="megamenu-holder"><a href="{{route('filter.categories')}}">Categories</a>
                                         <ul class="megamenu hb-megamenu">
                                             <li><a href="#">Book Category</a>
-                                                <ul>
-                                                    <li><a href="#">Romace</a></li>
-                                                    <li><a href="#">Horror</a></li>
-                                                    <li><a href="#">Love Story</a></li>
-                                                    <li><a href="#">Crime</a></li>
-                                                    <li><a href="#">Drama</a></li>
-                                                </ul>
+                                               
                                             </li>
                                             <li><a href="#">Shop Category</a>
-                                                <ul>
-                                                    <li><a href="#">Polano's Shop</a></li>
-                                                    <li><a href="#">Polana's Shop</a></li>
-                                                    <li><a href="#">Kuya's Shop</a></li>
-                                                </ul>
+                                               
                                             </li>
                                         </ul>
                                     </li>
@@ -386,9 +378,31 @@
 
         <script>
         $('#delCart').on('show.bs.modal', function (e) {
-        var opener=e.relatedTarget;
-        var id=$(opener).attr('id');
-        $('#delete_frm').find('[name="id"]').val(id);
+            var opener=e.relatedTarget;
+            var id=$(opener).attr('id');
+            $('#delete_frm').find('[name="id"]').val(id);
+        });
+        </script>
+
+         <script>
+            $('#buyBook').on('show.bs.modal', function (e) {
+                var opener=e.relatedTarget;
+                var id=$(opener).attr('id');
+                var shop_book_id=$(opener).attr('shop_book_id');
+                var quantity=document.getElementById('quantity').value;
+                var unit_price=$(opener).attr('unit_price');
+                $('#buy_frm').find('[name="id"]').val(id);
+                $('#buy_frm').find('[name="shop_book_id"]').val(shop_book_id);
+                $('#buy_frm').find('[name="quantity"]').val(quantity);
+                $('#buy_frm').find('[name="unit_price"]').val(unit_price);
+            });
+        </script>
+
+        <script>
+        $('#delCart').on('show.bs.modal', function (e) {
+            var opener=e.relatedTarget;
+            var id=$(opener).attr('id');
+            $('#delete_frm').find('[name="id"]').val(id);
         });
         </script>
        

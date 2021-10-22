@@ -28,7 +28,7 @@
                         <a href="{{route('view.customer.list')}}" class="btn btn-warning btn-block"><b>My Customer</b></a>
                     </li>
                     <li class="list-group-item">
-                        <a href="#" class="btn btn-warning btn-block"><b>Transaction History</b></a>
+                        <a href="{{route('display.processing')}}" class="btn btn-warning btn-block"><b>Transaction History</b></a>
                     </li>
                 </ul>
             </div>
@@ -36,7 +36,7 @@
         <div class="col-md-9">
             <div class="card">
                 <div class="card-header bg-warning">
-                  <h5>Selling Books <a type="button" class="btn btn-success" data-toggle="modal" data-target="#addBook"><span> Add Book</span></a></h5>
+                  <h5>Selling Books <a type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#addBook"><span> Add Book</span></a></h5>
                 </div>
                 <div class="card-body">
                     <table class="display table table-responsive table-striped" id="myTable">
@@ -99,21 +99,26 @@
         <div class="modal-body">
             <div class="row">
                 <div class="col-12">
-                    <div class="form-group">
-                      <label for="exampleInputFile">Image</label>
-                      <div class="input-group">
-                          <input class="form-control" type="file" name="image">
-                          <div class="input-group-append">
-                              <span class="input-group-text">Upload</span>
+                    <div class="row">
+                      <div class="col-6">
+                        <div class="form-group">
+                          <label for="exampleInputFile">Image</label>
+                          <div class="input-group">
+                              <input class="form-control" type="file" name="image">
                           </div>
+                        </div>
+                      </div>
+                      <div class="col-6">
+                        <div class="form-group">
+                          <label for="name" class="p-1">Book Title :</label>
+                          <input id="name" name="name" type="text" class="@error('name') is-invalid @enderror form-control" 
+                                  placeholder="Enter Book Name" required>
+                        </div>
                       </div>
                     </div>
+                    
 
-                    <div class="form-group">
-                      <label for="name" class="p-1">Book Title :</label>
-                      <input id="name" name="name" type="text" class="@error('name') is-invalid @enderror form-control" 
-                              placeholder="Enter Book Name" required>
-                    </div>
+                    
 
                     <div class="form-group">
                       <label for="description" class="p-1">Book Description :</label>
@@ -126,30 +131,14 @@
                       <textarea id="summernoteDetails" type="text"  name="details" class="@error('details') is-invalid @enderror form-control" 
                               placeholder="Enter Book Details" required></textarea>
                     </div>
+                    
                     <div class="form-group">
-                        <label>Select Categories</label>
-                        <select name="category" id="category" class="form-control select2 select2-hidden-accessible" style="width: 100%;" aria-hidden="true">
-                            <option value="Mathematics">Mathematics</option>
-                            <option value="English">English</option>
-                            <option value="Science">Science</option>
-                            <option value="Filipino">Filipino</option>
-                            <option value="Literature & Fiction">Literature & Fiction</option>
-                            <option value="Arts & Music">Arts & Music</option>
-                            <option value="Comics">Comics</option>
-                            <option value="Biographies">Biographies</option>
-                            <option value="Mysteries">Mysteries</option>
-                            <option value="Sports">Sports</option>
-                            <option value="Medical">Medical</option>
-                            <option value="Business">Business</option>
-                            <option value="Cooking">Cooking</option>
-                            <option value="Comp & Tech">Comp & Tech</option>
-                            <option value="Education & Reference">Education & Reference</option>
-                            <option value="Sci-Fi & Fantasy">Sci-Fi & Fantasy</option>
-                            <option value="Entertainment">Entertainment</option>
-                            <option value="Health & Fitness">Health & Fitness</option>
-                            <option value="Health & Fitness">Horror</option>
-                            <option value="Health & Fitness">Romance</option>
-                        </select>
+                      <label>Select Categories</label>
+                      <select name="categories" id="InputCategories" class="form-control select2 select2-hidden-accessible" style="width: 100%;" aria-hidden="true" required>
+                          @foreach($category as $data)
+                          <option value="{{$data->category_title}}">{{$data->category_title}}</option>
+                          @endforeach
+                      </select>
                     </div>
 
                     <div class="row">

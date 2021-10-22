@@ -70,7 +70,7 @@
                                         <div class="product_desc_info">
                                             <div class="product-review">
                                                 <h5 class="manufacturer">
-                                                    <a href="{{route('seller.shop')}}">{{$data->shop_name}}</a>
+                                                    <a href="{{route('filter.shop.name',$data->shop_name)}}">{{$data->shop_name}}</a>
                                                 </h5>
                                             </div>
                                             <h4><a class="product_name" href="{{route('view.book.item',$data->id)}}">{{$data->name}}</a></h4>
@@ -109,7 +109,7 @@
                                         <div class="product_desc_info">
                                             <div class="product-review">
                                                 <h5 class="manufacturer">
-                                                    <a href="{{route('seller.shop')}}">Boi's Shop</a>
+                                                    <a href="#">Boi's Shop</a>
                                                 </h5>
                                             </div>
                                             <h4><a class="product_name" href="#">The day you said Goodnight</a></h4>

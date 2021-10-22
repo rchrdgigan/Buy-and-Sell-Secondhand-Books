@@ -42,7 +42,7 @@
                     <b>Address : </b><span>{{Auth::user()->street}}, {{Auth::user()->brgy}}, {{Auth::user()->purok}}</span>
                     </li>
                     <li class="list-group-item">
-                    <button type="submit" class="btn btn-warning btn-block"><b>Update Profile Picture</b></button>
+                    <button type="submit" class="btn btn-warning btn-block  btn-sm"><b>Update Profile Picture</b></button>
                     </li>
                 </ul>
 
@@ -105,7 +105,7 @@
 
                         </div>
                     </div>
-                    <button class="btn btn-warning mt-2 float-right" type="submit"><b>Update Info</b></button>
+                    <button class="btn btn-warning mt-2 float-right btn-sm" type="submit"><b>Update Info</b></button>
                 </div>
             </div>
         </div>           

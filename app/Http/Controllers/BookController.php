@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 use App\Models\UserShop;
 use App\Models\ShopBook;
+use App\Models\ShopBookCategory;
+use App\Models\AssignBookCategory;
+use App\Models\Category;
 use App\Models\Book;
 use Illuminate\Http\Request;
 
@@ -22,7 +25,8 @@ class BookController extends Controller
             $itemBook->total_amount = $my_book->total_amount;
             $itemBook->image = $my_book->image;
         });
-        return view('add-to-sell',compact('book'));
+        $category = Category::get();
+        return view('add-to-sell',compact('book','category'));
     }
 
     public function create(Request $request)
@@ -36,7 +40,7 @@ class BookController extends Controller
                 'description' => ['required', 'string', 'max:255'],
                 'details' => ['required', 'string', 'max:255'],
                 'quantity' => ['required', 'string', 'max:255'],
-                'category' => ['required', 'string', 'max:255'],
+                'categories' => ['required', 'string', 'max:255'],
                 'unit_price' => ['required', 'string', 'max:255'],
                 'total_amount' => ['required', 'string', 'max:255'],
                 'image'         => 'nullable|image|file|max:5000',
@@ -58,7 +62,7 @@ class BookController extends Controller
                 'description' => $request->description,
                 'details' => $request->details,
                 'quantity' => $request->quantity,
-                'category' => $request->category,
+                'category' => $request->categories,
                 'unit_price' => $request->unit_price,
                 'total_amount' => $request->total_amount,
                 'image' => $fileNameToStore,
@@ -68,7 +72,20 @@ class BookController extends Controller
                 'user_id' => auth()->user()->id,
                 'shop_id' => $s_id->shop_id,
                 'book_id' =>  $book->id,
-            ]); 
+            ]);
+            
+            $book_cat = Category::where('category_title',$request->categories)->get();
+            foreach($book_cat as $data){
+                AssignBookCategory::create([
+                    'book_id' => $book->id,
+                    'category_id' => $data->id,
+                ]);
+                ShopBookCategory::create([
+                    'shop_id' => $s_id->shop_id,
+                    'book_id' =>  $book->id,
+                    'category_id' =>  $data->id,
+                ]);
+            }
             return back()->with('message','Book added successfully!');
         }
     }

@@ -28,7 +28,7 @@
                         <a href="{{route('view.customer.list')}}" class="btn btn-warning btn-block"><b>My Customer</b></a>
                     </li>
                     <li class="list-group-item">
-                        <a href="#" class="btn btn-warning btn-block"><b>Transaction History</b></a>
+                        <a href="{{route('display.processing')}}" class="btn btn-warning btn-block"><b>Transaction History</b></a>
                     </li>
                 </ul>
             </div>
@@ -39,6 +39,15 @@
                 <div class="card-body box-profile">
                 <form action="{{route('shop.info')}}" method="POST">
                     @csrf
+                    @if($shop == null)
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="alert alert-success alert-dismissible">
+                                Note: Shop information cannot be edit. Please double check shop information before you start your business. Thank you!
+                            </div>
+                        </div>
+                    </div>
+                    @endif
                     <div class="row">
                         <div class="col-12">
                             <div class="form-group">
@@ -54,7 +63,9 @@
                         </div>
                         
                     </div>
-                    <button class="btn btn-warning mt-2 float-right" type="submit"><b>Update Info</b></button>
+                    @if($shop == null)
+                    <button class="btn btn-warning mt-2 float-right btn-sm" type="submit"><b>Get Started</b></button>
+                    @endif
                 </form>
                 </div>
             </div>

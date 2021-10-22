@@ -30,4 +30,15 @@ class Book extends Model
         return $this->hasMany(CartBook::class);
     }
 
+    public function assign_book_category()
+    {
+        return $this->hasMany(AssignBookCategory::class);
+    }
+    
+    public function shop_book_category()
+    {
+        return $this->hasMany(ShopBookCategory::class);
+    }
+
+
 }

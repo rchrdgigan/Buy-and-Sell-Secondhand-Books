@@ -19,6 +19,23 @@
                         </div>
                     </div>
                     
+                    <!-- product-select-box start -->
+                    <form action="{{route('sorting.book',$category_title)}}" method="GET">
+                    @csrf
+                    <div class="product-select-box">
+                        <div class="product-short">
+                            <p>Sort By:</p>
+                            <select class="nice-select" name="sortBy" id="sortBy">
+                                <option value="a-z" {{(isset($_GET['sortBy']) && ($_GET['sortBy'] == "a-z"))? "selected":""}}>Name (A - Z)</option>
+                                <option value="z-a" {{(isset($_GET['sortBy']) && ($_GET['sortBy'] == "z-a"))? "selected":""}}>Name (Z - A)</option>
+                            </select>
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-warning btn-sm rounded-right">Sort</button>
+                            </div>
+                        </div>
+                    </div>
+                    </form>
+                    <!-- product-select-box end -->
                 </div>
                 <!-- shop-top-bar end -->
                 <!-- shop-products-wrapper start -->
@@ -27,7 +44,7 @@
                         <div id="grid-view" class="tab-pane fade active show" role="tabpanel">
                             <div class="product-area shop-product-area">
                                 <div class="row">
-                                    @foreach($shop_book->sortBy('name') as $data)
+                                @foreach($shop_book as $data)
                                     <div class="col-lg-4 col-md-4 col-sm-6 mt-40">
                                         <!-- single-product-wrap start -->
                                         <div class="single-product-wrap">
@@ -39,9 +56,13 @@
                                             <div class="product_desc">
                                                 <div class="product_desc_info">
                                                     <div class="product-review">
-                                                        <h5 class="manufacturer">
-                                                            <a href="{{route('filter.shop.name',$data->shop_name)}}">{{$data->shop_name}}</a>
-                                                        </h5>
+                                                        @foreach($data->shop_book->take(1) as $sname)
+                                                            @foreach($shop->where('id',$sname->shop_id) as $shops)
+                                                            <h5 class="manufacturer">
+                                                                <a href="{{route('filter.shop.name',$shops->name)}}">{{$shops->name}}</a>
+                                                            </h5>
+                                                            @endforeach
+                                                        @endforeach
                                                     </div>
                                                     <h4><a class="product_name" href="">{{$data->name}}</a></h4>
                                                     <div class="price-box">
@@ -62,7 +83,7 @@
                                 </div>
                             </div>
                         </div>
-
+                        
                         <div class="paginatoin-area mb-50">
                             <div class="row">
                                 <div class="mx-auto">{{ $shop_book->links("pagination::bootstrap-4") }}</div>
