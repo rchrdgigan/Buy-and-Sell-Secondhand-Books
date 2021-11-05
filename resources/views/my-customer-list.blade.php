@@ -61,6 +61,7 @@
                                     <button class="btn btn-warning float-right btn-sm" 
                                             type="submit"
                                             id="{{$data->id}}"
+                                            book_id="{{$data->book_id}}"
                                             book_title="{{$data->book_title}}"
                                             price="{{$data->unit_price}}"
                                             quantity="{{$data->quantity}}"
@@ -139,6 +140,9 @@
         @method('PUT')
             @csrf
             <input type="text" name="trans_id" hidden>
+            <input type="text" name="book_id" hidden>
+            <input type="text" name="quantity" hidden>
+            <input type="text" name="total_price" hidden>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
                 <button type="submit" class="btn btn-warning btn-sm">Approved</button>

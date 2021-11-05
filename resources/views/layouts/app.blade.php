@@ -135,6 +135,7 @@
     $('#viewBook').on('show.bs.modal', function (e) {
         var opener=e.relatedTarget;
         var id=$(opener).attr('id');
+        var book_id=$(opener).attr('book_id');
         var book_title=$(opener).attr('book_title');
         var unit_price=$(opener).attr('price');
         var quantity=$(opener).attr('quantity');
@@ -144,8 +145,12 @@
         var details=$(opener).attr('details');
         var description=$(opener).attr('description');
         var imgsrc=$(opener).attr('image');
+        
 
         $('#approved_frm').find('[name="trans_id"]').val(id);
+        $('#approved_frm').find('[name="book_id"]').val(book_id);
+        $('#approved_frm').find('[name="quantity"]').val(quantity);
+        $('#approved_frm').find('[name="total_price"]').val(total);
 
         document.getElementById('book_title').innerHTML = book_title;
         document.getElementById('unit_price').innerHTML = unit_price;

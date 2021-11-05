@@ -238,6 +238,11 @@ class ShopController extends Controller
     //Update status to processing
     public function inprocessBook(Request $request)
     {
+        $book = Book::findOrFail($request->book_id);
+        $book->quantity = $book->quantity - $request->quantity;
+        $book->total_amount = $book->total_amount - $request->total_price;
+        $book->update();
+
         $user_order = Transaction::findOrFail($request->trans_id);
         $user_order->status = 'processing';
         $user_order->update();
