@@ -185,11 +185,26 @@
                                     </li>
                                     <li class="megamenu-holder"><a href="{{route('filter.categories')}}">Categories</a>
                                         <ul class="megamenu hb-megamenu">
-                                            <li><a href="#">Book Category</a>
-                                               
+                                            <li><a href="{{route('filter.categories')}}">Book Category</a>
+                                            @foreach($category->take(5) as $d2)
+
+                                                @forelse($d2->assign_book_category->take(1) as $c1)
+                                               <a href="{{route('filter.categories.name',$d2->category_title)}}">{{$d2->category_title}} ({{$c1->where('category_id',$d2->id)->count()}})</a>
+                                                @empty
+                                                @endforelse
+                                            @endforeach
+
                                             </li>
-                                            <li><a href="#">Shop Category</a>
-                                               
+
+                                            <li><a href="{{route('filter.categories')}}">Shop Category</a>
+                                            @foreach($shop->take(5) as $d3)
+
+                                                @forelse($d3->shop_book->take(1) as $c2)
+                                                <a href="{{route('filter.shop.name',$d3->name)}}">{{$d3->name}} ({{$c2->where('shop_id',$d3->id)->count()}})</a>
+                                                @empty
+                                                @endforelse
+                                            @endforeach
+
                                             </li>
                                         </ul>
                                     </li>

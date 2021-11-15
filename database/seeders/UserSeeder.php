@@ -19,6 +19,7 @@ class UserSeeder extends Seeder
             'brgy' => 'Brgy',
             'street' => 'Street',
             'purok' => 'Purok',
+            'contact' => '12345678123',
             'email' => 'example_user@gmail.com',
             'password' => Hash::make('q1w2e3r4t5y6'),
             'created_at' => now(),

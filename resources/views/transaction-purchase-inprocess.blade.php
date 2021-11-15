@@ -50,14 +50,18 @@
                             </tr>
                         </thead>
                         <tbody>
-                        @forelse($customer->where('status', 'processing') as $data)
+                        @forelse($customer->where('status', '<>' , 'pending') as $data)
                             <tr>
-                                <td><a href="#"><img height="75" src="/storage/book_image/{{$data->image}}"></a></td>
-                                <td><a href="#">{{$data->book_title}}</a></td>
+                                <td><img height="75" src="/storage/book_image/{{$data->image}}"></td>
+                                <td><span>{{$data->book_title}}</a></td>
                                 <td><span class="amount">{{$data->unit_price}}</span></td>
                                 <td><span class="amount">{{$data->quantity}}</span></td>
                                 <td><span class="amount">{{$data->total_price}}</span></td>
-                                <td><span class="amount bg-info text-white rounded">processing</span></td>
+                                @if($data->status == 'completed')
+                                <td><span class="amount bg-success text-white rounded">Completed</span></td>
+                                @elseif($data->status == 'processing')
+                                <td><span class="amount bg-info text-white rounded">Processing</span></td>
+                                @endif
                                 <td>
                                     <a type="button" class="btn btn-primary btn-sm">
                                         View

@@ -8,7 +8,8 @@ use App\Http\Controllers\{
     BookController,
     ShopController,
     MainController,
-    PurchaseController
+    PurchaseController,
+    AccountManagementController,
 };
 
 Route::get('/', function () {
@@ -19,7 +20,7 @@ Auth::routes();
 //Display Book In Main Page
 Route::get('/', [MainController::class, 'mainPageBooks'])->name('welcome');
 
-Route::get('/login/admin', [LoginController::class, 'showAdminLoginForm']);
+Route::get('/login/admin', [LoginController::class, 'showAdminLoginForm'])->name('admin.login');
 Route::post('/login/admin', [LoginController::class,'adminLogin']);
 
 Route::group(['middleware' => 'auth:admin'], function () {
@@ -29,21 +30,21 @@ Route::group(['middleware' => 'auth:admin'], function () {
             return view('admin.main');
         })->name('admin.main');
 
-        Route::get('users', function () {
-            return view('admin.user-management');
-        })->name('admin.users');
+        Route::get('users', [AccountManagementController::class, 'showUsers'])->name('admin.users');
+        Route::get('/users/status/{user_id}/{status_code}', [AccountManagementController::class, 'updateStatus'])->name('update.status');
+        Route::delete('/users/delete/{id}',[AccountManagementController::class, 'destroy'])->name('destroy.user');
+
+        Route::get('users/reported',[AccountManagementController::class, 'listReported'])->name('admin.reported');
+        Route::get('/users/block/{user_id}/{status_code}', [AccountManagementController::class, 'blockStatus'])->name('block.status');
+        Route::get('users/blocked',[AccountManagementController::class, 'listBlocked'])->name('admin.blocked');
+        Route::get('/users/unblock/{user_id}/{status_code}', [AccountManagementController::class, 'unblockStatus'])->name('unblock.status');
+        Route::get('users/history',[AccountManagementController::class, 'listHistory'])->name('admin.history');
+        Route::delete('/users/history/{id}',[AccountManagementController::class, 'delReport'])->name('reported.del');
 
         Route::get('user/profile', function () {
             return view('admin.user-profile');
         })->name('user.profile');
 
-        Route::get('users/reported', function () {
-            return view('admin.reported');
-        })->name('admin.reported');
-
-        Route::get('users/blocked', function () {
-            return view('admin.blocked');
-        })->name('admin.blocked');
     });
 });
 
@@ -86,6 +87,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::put('/myshop/transaction/approved', [ShopController::class, 'inprocessBook'])->name('transaction.processing');
         Route::get('/myshop/transaction/history', [ShopController::class, 'displayInprocess'])->name('display.processing');
 
+        //Report USer
+        Route::post('/report/user/{user_id}',[AccountManagementController::class, 'reportedBy'])->name('report.user');
     });
 });
 Route::get('/view-book-item/{id}', [MainController::class, 'buyBooks'])->name('view.book.item');

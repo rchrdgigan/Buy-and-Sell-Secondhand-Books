@@ -98,6 +98,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <i class="nav-icon fas fa-box-open"></i>
             <p>Block Listed</p></a>
           </li>
+
+          <li class="nav-item">
+            <a href="{{route('admin.history')}}" class="nav-link">
+            <i class="nav-icon fas fa-box-open"></i>
+            <p>Reported History</p></a>
+          </li>
           
           <hr>
           @guest @if (Route::has('login'))
@@ -177,7 +183,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 <script>
   $(function () {
-    $("#food_item").DataTable({
+    $("#all").DataTable({
       "order":[[0,'desc']],
       "responsive": true, 
       "lengthChange": true, 
@@ -186,6 +192,5 @@ scratch. This page gets rid of all links and provides the needed markup only.
     });
   });
 </script>
-
 </body>
 </html>

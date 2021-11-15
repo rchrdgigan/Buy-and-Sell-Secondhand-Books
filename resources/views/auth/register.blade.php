@@ -8,10 +8,19 @@
                 <div class="card-header">{{ __('Register') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
+                    <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
                         @csrf
+                        <div class="container">
+                            <div class="picture-container">
+                                <div class="picture">
+                                    <img src="/storage/users_image/" class="picture-src" id="wizardPicturePreview" title="">
+                                    <input type="file" name="image" id="wizard-picture" class="" required>
+                                    <h6 class="">Choose Picture</h6>
+                                </div>
+                            </div>
+                        </div>
 
-                        <div class="form-group row">
+                        <div class="form-group row mt-4">
                             <label for="first_name" class="col-md-4 col-form-label text-md-right">{{ __('First Name') }}</label>
 
                             <div class="col-md-6">
@@ -24,6 +33,7 @@
                                 @enderror
                             </div>
                         </div>
+                        
                         <div class="form-group row">
                             <label for="middle_name" class="col-md-4 col-form-label text-md-right">{{ __('Middle Name') }}</label>
 
@@ -123,6 +133,29 @@
                                 @enderror
                             </div>
                         </div>
+
+                        <div class="form-group row">
+                            <label for="contact" class="col-md-4 col-form-label text-md-right">{{ __('Contact Number') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="contact" type="text" maxlength="11" class="form-control @error('contact') is-invalid @enderror" name="contact" value="{{ old('contact') }}" required autocomplete="contact" autofocus>
+
+                                @error('contact')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="valid_id" class="col-md-4 col-form-label text-md-right">{{ __('Upload Valid ID') }}</label>
+                            
+                            <div class="col-md-6">
+                                <input type="file" name="valid_id" class="form-control" required>
+                            </div>
+                        </div>
+
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 

@@ -51,10 +51,10 @@
                                         </div>
                                     </div>
                                     <h6 class="profile-username text-center mb-3 p-2">{{$data->first_name}} {{$data->middle_name}} {{$data->last_name}}</h6>
-                                    <div class="form-group h6">
-                                        <b>Email : </b><span> {{$data->email}}</span>
+                                    <div class="form-group" style="font-size:10pt; margin:0;">
+                                        <b>Email : </b><span><a href="">{{$data->email}}</a></span>
                                     </div>
-                                    <div class="form-group h6">
+                                    <div class="form-group" style="font-size:10pt;">
                                         <b>Address : </b><span> {{$data->brgy}} {{$data->street}} {{$data->purok}}</span>
                                     </div>
                                     <button class="btn btn-warning float-left btn-sm" type="submit" data-toggle="modal" data-target="#cancelBook"><b>Cancel Order</b></button>

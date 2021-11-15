@@ -4,6 +4,12 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
+            @if (session('error'))
+                <div class="alert alert-danger">
+                <img src="{{asset('vendor/images/block-svgrepo-com.svg')}}" height="30">
+                {{ session('error') }}
+                </div>
+            @endif
             @if(Session::get('fail'))
                 <div class="alert alert-danger">
                     <strong>{{ Session::get('fail') }}</strong>
@@ -12,8 +18,14 @@
                     </button>
                 </div>
             @endif
-            <div class="text-center mt-5">
+            <div class="text-center mt-4">
+                @if(request()->route()->getName() == 'admin.login')
+                <img src="{{asset('vendor/images/admin-with-cogwheels-svgrepo-com.svg')}}" height="150">
+                
+                <h2 class="text-secondary mb-4 text-uppercase" style="font-family:Algerian">Admin Login</h2>
+                @else
                 <img class="mb-4 rounded-circle" src="{{asset('vendor/images/logo.png')}}" height="150">
+                @endif
             </div>
             @isset($url)
             <form method="POST" class="form-signin" action='{{ url("login/$url") }}' aria-label="{{ __('Login') }}">

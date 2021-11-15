@@ -58,8 +58,11 @@ class RegisterController extends Controller
             'brgy' => ['required', 'string', 'max:255'],
             'street' => ['required', 'string', 'max:255'],
             'purok' => ['required', 'string', 'max:255'],
+            'contact' => ['required', 'string', 'max:12'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'image'         => 'nullable|image|file|max:5000',
+            'valid_id'         => 'nullable|image|file|max:5000',
         ]);
     }
 
@@ -71,6 +74,31 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        if($data['image'])
+        {
+            $filenameWithExt = $data['image']->getClientOriginalName();
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            $extension = $data['image']->getClientOriginalExtension();
+            $file_image = $filename.'_'.time().'.'.$extension;
+            $path = $data['image']->storeAs('public/users_image',$file_image);
+        }
+        else
+        {
+            $file_image = 'noimage.png';
+        }
+
+        if($data['valid_id'])
+        {
+            $filenameWithExt = $data['valid_id']->getClientOriginalName();
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            $extension = $data['valid_id']->getClientOriginalExtension();
+            $file_valid_id = $filename.'_'.time().'.'.$extension;
+            $path = $data['valid_id']->storeAs('public/valid_prof',$file_valid_id);
+        }
+        else
+        {
+            $file_valid_id = 'noimage.png';
+        }
         return User::create([
             'first_name' => $data['first_name'],
             'middle_name' => $data['middle_name'],
@@ -80,6 +108,9 @@ class RegisterController extends Controller
             'brgy' => $data['brgy'],
             'street' => $data['street'],
             'purok' => $data['purok'],
+            'contact' => $data['contact'],
+            'image' => $file_image,
+            'valid_prof' => $file_valid_id,
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);

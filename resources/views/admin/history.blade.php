@@ -1,17 +1,9 @@
 @extends('../layouts.admin') 
 @section('content')
 <div class="container-fluid">
-    @if(session('message'))
-        <div class="alert alert-success alert-dismissible">
-            {{ session('message') }}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    @endif
     <div class="card">
         <div class="card-header bg-primary">
-        <h3 class="card-title">Blocked Users</h3>
+        <h3 class="card-title">History Log</h3>
         </div>
         <!-- /.card-header -->
         <div class="card-body">
@@ -22,21 +14,27 @@
                 <th>Full Name</th>
                 <th>Date of Reported</th>
                 <th>Date of Blocked</th>
+                <th>Date of Unblocked</th>
                 <th>Status</th>
                 <th>Tools</th>
             </tr>
             </thead>
             <tbody>
-            @foreach($report->where('status', 'blocked') as $data)
+            @foreach($report->where('status', 'draft') as $data)
             <tr>
                 <td hidden="">{{$data->id}}</td>
                 <td>{{$data->first_name}} {{$data->middle_name}} {{$data->last_name}}</td>
                 <td>{{$data->created_at}}</td>
                 <td>{{$data->date_of_blocked}}</td>
-                <td><span class="bg-success rounded-circle p-1">blocked</span></td>
+                <td>{{$data->date_of_unblocked}}</td>
+                <td><span class="bg-secondary rounded-circle p-1">draft</span></td>
                 <td>
-                    <a href="" class="btn btn-primary .btn-md"><i class="nav-icon fas fa-eye"></i> View</a>
-                    <a href="{{route('unblock.status',['user_id'=> $data->user_id , 'status_code' => 'approved'])}}" class="btn btn-success .btn-md"><i class="nav-icon fas fa-check"></i> Unblock</a>
+                    <form action="{{route('reported.del',$data->id)}}" method="post">
+                        @method("DELETE")
+                        @csrf
+                        <a href="" class="btn btn-primary .btn-md"><i class="nav-icon fas fa-eye"></i> View</a>
+                        <button type="submit" class="btn btn-danger .btn-md"><i class="nav-icon fas fa-trash"></i> Delete</button>
+                    </form>
                 </td>
             </tr>
             @endforeach

@@ -1,0 +1,217 @@
+<?php
+
+namespace App\Http\Controllers;
+use Carbon\Carbon;
+use App\Models\User;
+use App\Models\ReportInfo;
+use App\Models\AssignReportedUser;
+
+use Illuminate\Http\Request;
+
+class AccountManagementController extends Controller
+{
+    public function showUsers()
+    {
+        $user_data = User::latest()->get();
+
+        return view('admin.user-management',compact('user_data'));
+    }
+    
+    public function updateStatus($user_id ,$status_code)
+    {
+        try {
+            $update_user = User::whereId($user_id)->update([
+                'status' => $status_code,
+            ]);
+            if($update_user){
+                return redirect()->route('admin.users')->with('success_message', 'Update status successfully!');
+            }
+            return redirect()->route('admin.users')->with('error_message', 'Updated status unsuccessfully!');
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
+
+    public function destroy($id)
+    {
+        try {
+            $user = User::find($id);
+            $user->delete();
+
+            if($user)
+            {
+                return redirect()->route('admin.users')->with('success_message', 'Successfully deleted!');
+            }
+            return redirect()->route('admin.users')->with('error_message', 'Unsuccessfully deleted!');
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
+
+    public function reportedBy(Request $request, $user_id)
+    {
+        if(auth()->user()->id == $user_id)
+        {
+            return "Youre not allowed to report your own account!";
+        }
+        else {
+            try {
+                $existing_user = AssignReportedUser::where('reported_by_id', auth()->user()->id)->where('user_id', $user_id)->first();
+                if($existing_user)
+                {
+                    return view('seller-already-reported');
+                }
+                //create reported user
+                if($request->hasFile('prof'))
+                {
+                    $filenameWithExt = $request->file('prof')->getClientOriginalName();
+                    $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+                    $extension = $request->file('prof')->getClientOriginalExtension();
+                    $fileNameToStore = $filename.'_'.time().'.'.$extension;
+                    $path = $request->file('prof')->storeAs('public/report_prof',$fileNameToStore);
+                }
+                else
+                {
+                    $fileNameToStore = 'noimage.png';
+                }
+
+                $report = ReportInfo::create([
+                    'reason' => $request->reason,
+                    'upload_prof' => $fileNameToStore,
+                ]);
+    
+                AssignReportedUser::create([
+                    'report_info_id'=>$report->id,
+                    'user_id' => $user_id,
+                    'reported_by_id' => auth()->user()->id,
+                ]);
+                if($report){
+                    return view('seller-reported-succeeded');
+                }
+
+            } catch (\Throwable $th) {
+                throw $th;
+                
+            }
+        }
+    }
+
+    public function listReported()
+    {
+        $report = AssignReportedUser::get();
+        $report->map(function($item){
+            $reported_info = ReportInfo::findOrFail($item->report_info_id);
+            $item->reason = $reported_info->reason;
+            $item->valid_prof = $reported_info->upload_prof;
+            $customer_info = User::findOrFail($item->user_id);
+            $item->user_image = $customer_info->image;
+            $item->first_name = $customer_info->first_name;
+            $item->middle_name = $customer_info->middle_name;
+            $item->last_name = $customer_info->last_name;
+            $item->gender = $customer_info->gender;
+            $item->brgy = $customer_info->brgy;
+            $item->street = $customer_info->street;
+            $item->purok = $customer_info->purok;
+            $item->email = $customer_info->email;
+        });
+        return view('admin.reported',compact('report'));
+
+    }
+
+    //admin block user
+    public function blockStatus($user_id ,$status_code)
+    {
+        try {
+            $update_user = User::whereId($user_id)->update([
+                'status' => $status_code,
+            ]);
+            $mytime = Carbon::now();
+            AssignReportedUser::where('user_id', $user_id)->update([
+                'date_of_blocked' => $mytime->toDateTimeString(),
+                'status' => 'blocked',
+            ]);
+            
+            if($update_user){
+                return redirect()->route('admin.blocked')->with('success_message', 'Update status successfully!');
+            }
+            return redirect()->route('admin.blocked')->with('error_message', 'Updated status unsuccessfully!');
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
+
+    public function listBlocked()
+    {
+        $report = AssignReportedUser::get();
+        $report->map(function($item){
+            $reported_info = ReportInfo::findOrFail($item->report_info_id);
+            $item->reason = $reported_info->reason;
+            $item->valid_prof = $reported_info->upload_prof;
+            $customer_info = User::findOrFail($item->user_id);
+            $item->user_image = $customer_info->image;
+            $item->first_name = $customer_info->first_name;
+            $item->middle_name = $customer_info->middle_name;
+            $item->last_name = $customer_info->last_name;
+            $item->gender = $customer_info->gender;
+            $item->brgy = $customer_info->brgy;
+            $item->street = $customer_info->street;
+            $item->purok = $customer_info->purok;
+            $item->email = $customer_info->email;
+        });
+        return view('admin.blocked',compact('report'));
+    }
+
+    //admin unblock user
+    public function unblockStatus($user_id ,$status_code)
+    {
+        try {
+            $update_user = User::whereId($user_id)->update([
+                'status' => $status_code,
+            ]);
+            if($update_user){
+                $mytime = Carbon::now();
+                AssignReportedUser::where('user_id', $user_id)->update([
+                    'date_of_unblocked' => $mytime->toDateTimeString(),
+                    'status' => 'draft',
+                ]);
+                return redirect()->route('admin.history')->with('success_message', 'Update status successfully!');
+            }
+            return redirect()->route('admin.history')->with('error_message', 'Updated status unsuccessfully!');
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
+
+    public function listHistory()
+    {
+        $report = AssignReportedUser::get();
+        $report->map(function($item){
+            $reported_info = ReportInfo::findOrFail($item->report_info_id);
+            $item->reason = $reported_info->reason;
+            $item->valid_prof = $reported_info->upload_prof;
+            $customer_info = User::findOrFail($item->user_id);
+            $item->user_image = $customer_info->image;
+            $item->first_name = $customer_info->first_name;
+            $item->middle_name = $customer_info->middle_name;
+            $item->last_name = $customer_info->last_name;
+            $item->gender = $customer_info->gender;
+            $item->brgy = $customer_info->brgy;
+            $item->street = $customer_info->street;
+            $item->purok = $customer_info->purok;
+            $item->email = $customer_info->email;
+        });
+        return view('admin.history',compact('report'));
+    }
+
+    public function delReport($id)
+    {
+        $report = ReportInfo::find($id);
+        $report->delete();
+
+        if($report)
+        {
+            return redirect()->route('admin.history')->with('message','Deleted Successfully!');
+        }
+    }
+
+}

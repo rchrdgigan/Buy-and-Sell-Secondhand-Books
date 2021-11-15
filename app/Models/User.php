@@ -28,7 +28,10 @@ class User extends Authenticatable
         'purok',
         'image',
         'email',
+        'contact',
         'password',
+        'status',
+        'valid_prof',
     ];
 
     /**

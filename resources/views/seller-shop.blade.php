@@ -72,16 +72,18 @@
                 @foreach($shop_name->take(1) as $udata)
                 @forelse($udata->user_shop->take(1) as $u1)
                 @foreach($users->where('id',$u1->user_id)->take(1) as $user)
+                    @guest
+                    @else
+                    @if($u1->user_id <> auth()->user()->id)
                     <div class="row ml-2">
                         <div class="input-group-prepend float-left">
-                        <button type="button" class="btn dropdown-toggle btn-sm" data-toggle="dropdown" aria-expanded="false">
-                            Action
-                        </button>
-                        <div class="dropdown-menu" style="">
-                            <a class="dropdown-item btn-sm" href="#"> Report Shop</a>
-                        </div>
+                            <button type="button" class="btn btn-sm text-xs p-0" data-toggle="modal" data-target="#reportModal">
+                                <u>Report</u>  
+                            </button>
                         </div>
                     </div>
+                    @endif
+                    @endguest
                     <ul>
                         <li><a href=""><img height="150" width="150" src="/storage/users_image/{{$user->image}}" class="rounded-circle mb-2" alt="" /></a></li>
                         <h3>{{$udata->name}}</h3>
@@ -154,5 +156,48 @@
     </div>
 </div>
 <!-- Content Wraper Area End Here -->
+<!-- Modal -->
+<div class="modal fade" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Report</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form action="{{route('report.user',$u1->user_id)}}" method="post" enctype="multipart/form-data">
+        @csrf
+        <div class="modal-body">
+            <div class="form-group row mt-4">
+                <label for="reason" class="col-md-4 col-form-label text-md-right font-weight-bold">{{ __('Why are you reporting this account?') }}</label>
 
+                <div class="col-md-6">
+                    <textarea id="reason" rows="5" type="text" class="form-control @error('reason') is-invalid @enderror" name="reason" value="{{ old('reason') }}" required autofocus></textarea>
+                    @error('reason')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+            </div>
+            
+            <div class="form-group row">
+                <label for="prof" class="col-md-4 col-form-label text-md-right font-weight-bold">{{ __('Upload your prof') }}</label>
+                
+                <div class="col-md-6">
+                    <input type="file" name="prof" class="form-control" required>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Confirmed</button>
+        </div>
+      </form>
+      
+    </div>
+  </div>
+</div>
+<!-- Modal End -->
 @endsection
