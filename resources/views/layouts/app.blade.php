@@ -194,3 +194,113 @@
     }
 </script>
 
+<script>
+    $('#viewPurchase').on('show.bs.modal', function (e) {
+        var opener=e.relatedTarget;
+        var id=$(opener).attr('id');
+        var book_title=$(opener).attr('book');
+        var unit_price=$(opener).attr('price');
+        var quantity=$(opener).attr('qty');
+        var total=$(opener).attr('total');
+        var status=$(opener).attr('status');
+        var imgsrc=$(opener).attr('image');
+        var shop=$(opener).attr('shop');
+        var address=$(opener).attr('address');
+        var contact=$(opener).attr('contact');
+
+        document.getElementById('trans_id').innerHTML = id;
+        document.getElementById('book_title').innerHTML = book_title;
+        document.getElementById('unit_price').innerHTML = unit_price;
+        document.getElementById('quantity').innerHTML = quantity;
+        document.getElementById('total_price').innerHTML = total;
+        document.getElementById('status').innerHTML = status;
+        document.getElementById('shop').innerHTML = shop;
+        document.getElementById('address').innerHTML = address;
+        document.getElementById('contact').innerHTML = contact;
+        $('#image').attr('src',imgsrc);
+
+    });
+</script>
+
+<script>
+    $('#cancelPurchase').on('show.bs.modal', function (e) {
+        var opener=e.relatedTarget;
+        var id=$(opener).attr('id');
+        var book_title=$(opener).attr('book');
+        var unit_price=$(opener).attr('price');
+        var quantity=$(opener).attr('qty');
+        var total=$(opener).attr('total');
+        var status=$(opener).attr('status');
+        var imgsrc=$(opener).attr('image');
+        var shop=$(opener).attr('shop');
+        var reason=$(opener).attr('reason');
+        var address=$(opener).attr('address');
+        var contact=$(opener).attr('contact');
+
+        document.getElementById('trans_id').innerHTML = id;
+        document.getElementById('book_title').innerHTML = book_title;
+        document.getElementById('unit_price').innerHTML = unit_price;
+        document.getElementById('quantity').innerHTML = quantity;
+        document.getElementById('total_price').innerHTML = total;
+        document.getElementById('status').innerHTML = status;
+        document.getElementById('shop').innerHTML = shop;
+        document.getElementById('reason').innerHTML = reason;
+        document.getElementById('address').innerHTML = address;
+        document.getElementById('contact').innerHTML = contact;
+        $('#image').attr('src',imgsrc);
+
+    });
+</script>
+
+<script>
+    $('#viewLog').on('show.bs.modal', function (e) {
+        var opener=e.relatedTarget;
+        var id=$(opener).attr('id');
+        var book_title=$(opener).attr('book');
+        var unit_price=$(opener).attr('price');
+        var quantity=$(opener).attr('qty');
+        var total=$(opener).attr('total');
+        var status=$(opener).attr('status');
+        var contact=$(opener).attr('contact');
+        var imgsrc=$(opener).attr('image');
+        var customer=$(opener).attr('customer');
+        var address=$(opener).attr('address');
+
+        document.getElementById('trans_id').innerHTML = id;
+        document.getElementById('book_title').innerHTML = book_title;
+        document.getElementById('unit_price').innerHTML = unit_price;
+        document.getElementById('quantity').innerHTML = quantity;
+        document.getElementById('total_price').innerHTML = total;
+        document.getElementById('status').innerHTML = status;
+        document.getElementById('contact').innerHTML = contact;
+        document.getElementById('customer').innerHTML = customer;
+        document.getElementById('address').innerHTML = address;
+        $('#image').attr('src',imgsrc);
+
+    });
+</script>
+
+
+<script>
+    $('#viewBooks').on('show.bs.modal', function (e) {
+        var opener=e.relatedTarget;
+        var book_title=$(opener).attr('book_title');
+        var book_desc=$(opener).attr('book_desc');
+        var book_detail=$(opener).attr('book_detail');
+        var book_cat=$(opener).attr('book_cat');
+        var quantity=$(opener).attr('quantity');
+        var price=$(opener).attr('price');
+        var total=$(opener).attr('total');
+        var imgsrc=$(opener).attr('image');
+
+        document.getElementById('book').innerHTML = book_title;
+        document.getElementById('book_desc').innerHTML = book_desc;
+        document.getElementById('book_detail').innerHTML = book_detail;
+        document.getElementById('book_cat').innerHTML = book_cat;
+        document.getElementById('qty').innerHTML = quantity;
+        document.getElementById('total').innerHTML = total;
+        document.getElementById('price').innerHTML = price;
+        $('#image').attr('src',imgsrc);
+
+    });
+</script>

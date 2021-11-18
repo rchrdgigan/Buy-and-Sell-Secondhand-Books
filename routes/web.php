@@ -112,3 +112,9 @@ Route::get('/shop/not/found', function () {
     $shop = Shop::with('shop_book')->get();
     return view('shop-not-found',compact('category','shop'));
 })->name('shop.not.found');
+Route::get('/contact', function () {
+    //Initializing caterogry and shop
+    $category = Category::with('assign_book_category')->get();
+    $shop = Shop::with('shop_book')->get();
+    return view('contact-us',compact('category','shop'));
+})->name('contact');

@@ -49,7 +49,7 @@
                                                 </div>
                                                 <div class="add-actions">
                                                     <ul class="add-actions-link">
-                                                        <li class="add-cart active"><a href="">Add to cart</a></li>
+                                                        <li class="add-cart active"><a href="{{route('add.cart',$data->id)}}">Add to cart</a></li>
                                                         <li><a href="{{route('view.book.item',$data->id)}}" title="quick view" class="quick-view-btn"><i class="fa fa-eye"></i></a></li>
                                                     </ul>
                                                 </div>

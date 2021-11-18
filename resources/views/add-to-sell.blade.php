@@ -15,6 +15,11 @@
         </div>
     </div>
     <div class="row">
+        <div class="col-12">
+        <h6 class="float-right"><a href="{{route('my.shop')}}">My Shop</a> / My Book</h6>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-md-3">
             <div class="card">
                 <ul class="list-group list-group-unbordered">
@@ -69,7 +74,17 @@
                                 <td><span class="amount">{{$data->total_amount}}</span></td>
                                 <td><span class="amount bg-success text-white p-1 rounded">selling</span></td>
                                 <td>
-                                    <a type="button" class="btn btn-primary" data-toggle="modal" data-target="#viewBook">
+                                    <a type="button" class="btn btn-primary" 
+                                    book_title="{{$data->name}}"
+                                    book_desc="{{$data->description}}"
+                                    book_detail="{{$data->details}}"
+                                    book_cat="{{$data->category}}"
+                                    price="{{$data->unit_price}}"
+                                    quantity="{{$data->quantity}}"
+                                    total="{{$data->total_amount}}"
+                                    image="/storage/book_image/{{$data->image}}"
+
+                                    data-toggle="modal" data-target="#viewBooks">
                                         View
                                     </a>
                                 </td>
@@ -117,9 +132,6 @@
                       </div>
                     </div>
                     
-
-                    
-
                     <div class="form-group">
                       <label for="description" class="p-1">Book Description :</label>
                       <textarea id="summernoteDescription" type="text"  name="description" class="@error('description') is-invalid @enderror form-control" 
@@ -199,10 +211,10 @@
 </div>
 
 <!-- Modal View-->
-<div class="modal fade" id="viewBook" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="viewBooks" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <div class="modal-header bg-success text-white">
+      <div class="modal-header bg-info text-white">
         <h5 class="modal-title" id="exampleModalLabel">Books Information</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
@@ -210,14 +222,58 @@
       </div>
         <div class="modal-body">
             <div class="row">
-                <div class="col-12">
-                    
+                <div class="col-12 text-center">
+                    <div class="container">
+                        <div class="picture-container">
+                            <div class="picture">
+                                <img class="picture-src" id="image">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row pt-4">
+                      <div class="form-group col-6">
+                            <b class="p-1">Book Title :</b><br>
+                            <span id="book"></span>
+                      </div>
+                      <div class="form-group col-6">
+                        <b>Book Categories :</b><br>
+                        <span id="book_cat"></span>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="form-group col-6">
+                        <b class="p-1">Book Description :</b>
+                        <span id="book_desc"></span>
+                      </div>
+                      <div class="form-group col-6">
+                        <b class="p-1">Book Details :</b>
+                        <span id="book_detail"></span>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="form-group col-6">
+                        <b class="p-1">Quantity :</b><br>
+                        <span id="qty"></span>
+                      </div>
+
+                      <div class="form-group col-6">
+                        <b for="unit_price" class="p-1">Unit Price :</b><br>
+                        <span id="price"></span>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <b for="total_amount" class="p-1">Total Amount :</b><br>
+                      <span id="total"></span>
+                    </div>
                 </div>
             </div>
         </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Add</button>
       </div>
     </div>
   </div>

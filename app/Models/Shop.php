@@ -12,6 +12,7 @@ class Shop extends Model
     protected $fillable = [
         'name',
         'address',
+        'contact',
     ];
 
     public function user_shop()

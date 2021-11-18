@@ -15,6 +15,11 @@
         </div>
     </div>
     <div class="row">
+        <div class="col-12">
+        <h6 class="float-right"><a href="{{route('my.shop')}}">My Shop</a> / My Customer</h6>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-md-3">
             <div class="card">
                 <ul class="list-group list-group-unbordered">
@@ -54,8 +59,11 @@
                                     <div class="form-group" style="font-size:10pt; margin:0;">
                                         <b>Email : </b><span><a href="">{{$data->email}}</a></span>
                                     </div>
-                                    <div class="form-group" style="font-size:10pt;">
+                                    <div class="form-group" style="font-size:10pt; margin:0;">
                                         <b>Address : </b><span> {{$data->brgy}} {{$data->street}} {{$data->purok}}</span>
+                                    </div>
+                                    <div class="form-group" style="font-size:10pt;">
+                                        <b>Contact : </b><span> {{$data->contact}}</span>
                                     </div>
                                     <button class="btn btn-warning float-left btn-sm" type="submit" data-toggle="modal" data-target="#cancelBook"><b>Cancel Order</b></button>
                                     <button class="btn btn-warning float-right btn-sm" 

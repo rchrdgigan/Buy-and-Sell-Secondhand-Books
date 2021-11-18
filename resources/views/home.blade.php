@@ -87,6 +87,10 @@
                             <label for="email" class="p-1">Email :</label>
                             <input id="email" value="{{auth()->user()->email}}" name="email"  type="email" class="@error('email') is-invalid @enderror form-control" 
                                     placeholder="Enter Email Ex: user@domain.com" required>
+                            <label for="contact" class="p-1">Contact :</label>
+                            <input id="contact" value="{{auth()->user()->contact}}" name="contact" maxlength="11" type="text" class="@error('contact') is-invalid @enderror form-control" 
+                                    placeholder="Enter Contact Ex: 09XXXXXXXXX" required>
+
 
                             <label for="bdate" class="p-1">Birth Date :</label>
                             <input id="bdate" name="birthdate" value="{{Carbon\Carbon::parse(auth()->user()->birthdate)->format('Y-m-d')}}" type="date" class="@error('bdate') is-invalid @enderror form-control" required>

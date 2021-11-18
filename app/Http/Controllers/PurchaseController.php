@@ -16,6 +16,8 @@ class PurchaseController extends Controller
         $user_order->map(function($item_order){
             $order_from = Shop::findOrFail($item_order->shop_id);
             $item_order->shop_name = $order_from->name;
+            $item_order->address = $order_from->address;
+            $item_order->contact = $order_from->contact;
             $my_order = Book::findOrFail($item_order->book_id);
             $item_order->image = $my_order->image;
             $order = $item_order->transaction;
@@ -34,6 +36,8 @@ class PurchaseController extends Controller
         $user_order->map(function($item_order){
             $order_from = Shop::findOrFail($item_order->shop_id);
             $item_order->shop_name = $order_from->name;
+            $item_order->address = $order_from->address;
+            $item_order->contact = $order_from->contact;
             $my_order = Book::findOrFail($item_order->book_id);
             $item_order->image = $my_order->image;
             $order = $item_order->transaction;
@@ -42,6 +46,7 @@ class PurchaseController extends Controller
             $item_order->quantity = $order->quantity;
             $item_order->total_price = $order->total_price;
             $item_order->status = $order->status;
+            $item_order->reason = $order->reason;
         });
         return view('my-purchase-canceled',compact('user_order'));
     }
@@ -52,6 +57,8 @@ class PurchaseController extends Controller
         $user_order->map(function($item_order){
             $order_from = Shop::findOrFail($item_order->shop_id);
             $item_order->shop_name = $order_from->name;
+            $item_order->address = $order_from->address;
+            $item_order->contact = $order_from->contact;
             $my_order = Book::findOrFail($item_order->book_id);
             $item_order->image = $my_order->image;
             $order = $item_order->transaction;
@@ -70,6 +77,8 @@ class PurchaseController extends Controller
         $user_order->map(function($item_order){
             $order_from = Shop::findOrFail($item_order->shop_id);
             $item_order->shop_name = $order_from->name;
+            $item_order->address = $order_from->address;
+            $item_order->contact = $order_from->contact;
             $my_order = Book::findOrFail($item_order->book_id);
             $item_order->image = $my_order->image;
             $order = $item_order->transaction;

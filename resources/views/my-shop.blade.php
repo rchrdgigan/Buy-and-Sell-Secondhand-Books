@@ -15,6 +15,11 @@
         </div>
     </div>
     <div class="row">
+        <div class="col-12">
+        <h6 class="float-right"><a href="{{route('my.shop')}}">My Shop</a> / Setting</h6>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-md-3">
             <div class="card">
                 <ul class="list-group list-group-unbordered">
@@ -75,6 +80,11 @@
                                 <input id="address"  value="{{($shop == null)? "": $shop_info->address}}" name="address" type="text" class="@error('address') is-invalid @enderror form-control" 
                                         placeholder="Enter Shop Address" required>
                             </div>
+                            <div class="form-group">
+                                <label for="contact" class="p-1">Shop Contact :</label>
+                                <input id="contact"  value="{{($shop == null)? "": $shop_info->contact}}" name="contact" type="text" class="@error('contact') is-invalid @enderror form-control" 
+                                        placeholder="Enter Shop Contact" required>
+                            </div>
                         </div>
                     </div>
                     @else
@@ -89,6 +99,11 @@
                                 <label for="address" class="p-1">Shop Address :</label>
                                 <input id="address"  value="{{$shop_info->address}}" name="address" type="text" class="@error('address') is-invalid @enderror form-control" 
                                         placeholder="Enter Shop Address" required readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="contact" class="p-1">Shop Contact :</label>
+                                <input id="contact"  value="{{$shop_info->contact}}" name="contact" type="text" class="@error('contact') is-invalid @enderror form-control" 
+                                        placeholder="Enter Shop Contact" required readonly>
                             </div>
                         </div>
                     </div>

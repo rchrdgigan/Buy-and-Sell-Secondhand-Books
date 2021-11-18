@@ -170,23 +170,25 @@
                                     <li class="megamenu-holder"><a href="{{route('filter.categories')}}">Categories</a>
                                         <ul class="megamenu hb-megamenu">
                                             <li><a href="{{route('filter.categories')}}">Book Category</a>
-                                            @foreach($category->take(5) as $d2)
-
-                                                @forelse($d2->assign_book_category->take(1) as $c1)
-                                               <a href="{{route('filter.categories.name',$d2->category_title)}}">{{$d2->category_title}} ({{$c1->where('category_id',$d2->id)->count()}})</a>
-                                                @empty
-                                                @endforelse
+                                            @foreach($category as $d2)
+                                                <ul>
+                                                    @forelse($d2->assign_book_category->take(1) as $c1)
+                                                    <li><a href="{{route('filter.categories.name',$d2->category_title)}}">{{$d2->category_title}} ({{$c1->where('category_id',$d2->id)->count()}})</a></li>
+                                                    @empty
+                                                    
+                                                    @endforelse
+                                                </ul>
                                             @endforeach
-
                                             </li>
 
                                             <li><a href="{{route('filter.categories')}}">Shop Category</a>
                                             @foreach($shop->take(5) as $d3)
-
-                                                @forelse($d3->shop_book->take(1) as $c2)
-                                                <a href="{{route('filter.shop.name',$d3->name)}}">{{$d3->name}} ({{$c2->where('shop_id',$d3->id)->count()}})</a>
-                                                @empty
-                                                @endforelse
+                                                <ul>
+                                                    @forelse($d3->shop_book->take(1) as $c2)
+                                                    <li><a href="{{route('filter.shop.name',$d3->name)}}">{{$d3->name}} ({{$c2->where('shop_id',$d3->id)->count()}})</a></li>
+                                                    @empty
+                                                    @endforelse
+                                                </ul>
                                             @endforeach
 
                                             </li>
@@ -198,12 +200,11 @@
                                                 <ul>
                                                     <li><a href="#">Bulan Area Only</a></li>
                                                     <li><a href="#">No Valid ID - No to Shopping</a></li>
-                                                    <li><a href="#">Start Book Bussiness</a></li>
                                                 </ul>
                                             </li>
                                         </ul>
                                     </li>
-                                    <li><a href="#">Contact</a></li>
+                                    <li><a href="{{route('contact')}}">Contact</a></li>
                                 </ul>
                             </nav>
                         </div>
@@ -262,7 +263,6 @@
                                 <h3 class="footer-block-title">Product</h3>
                                 <ul>
                                     <li><a href="#">Prices drop</a></li>
-                                    <li><a href="#">Best sales</a></li>
                                     <li><a href="#">Contact us</a></li>
                                 </ul>
                             </div>

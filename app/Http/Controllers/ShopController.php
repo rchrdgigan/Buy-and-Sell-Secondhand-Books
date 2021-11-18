@@ -33,12 +33,14 @@ class ShopController extends Controller
         $validated = $request->validate([
             'name' => ['required', 'string', 'unique:shops'],
             'address' => ['required', 'string', 'max:255'],
+            'contact' => ['required', 'string', 'max:255'],
         ]);
         $user_shop = UserShop::where('user_id', auth()->user()->id)->get();
         if($user_shop->isEmpty()){
             $shop = Shop::create([
                 'name' => $request->name,
                 'address' => $request->address,
+                'contact' => $request->contact,
             ]);
             UserShop::create([
                 'shop_id'=> $shop->id,
@@ -222,6 +224,7 @@ class ShopController extends Controller
             $item_customer->street = $customer_info->street;
             $item_customer->purok = $customer_info->purok;
             $item_customer->email = $customer_info->email;
+            $item_customer->contact = $customer_info->contact;
             $customer_order = Book::findOrFail($item_customer->book_id);
             $item_customer->image = $customer_order->image;
             $item_customer->available = $customer_order->quantity;
@@ -267,6 +270,7 @@ class ShopController extends Controller
             $item_customer->street = $customer_info->street;
             $item_customer->purok = $customer_info->purok;
             $item_customer->email = $customer_info->email;
+            $item_customer->contact = $customer_info->contact;
             $customer_order = Book::findOrFail($item_customer->book_id);
             $item_customer->image = $customer_order->image;
             $item_customer->available = $customer_order->quantity;
