@@ -132,6 +132,8 @@ class ShopController extends Controller
     public function checkoutCart(Request $request)
     {
         $book = ShopBook::where('id', $request->shop_book_id)->get();
+        $category = Category::with('assign_book_category')->get();
+        $shop = Shop::with('shop_book')->get();
         $book->map(function ($item){
             $item_book = Book::findorfail($item->book_id);
             $item->name = $item_book->name;
@@ -150,7 +152,7 @@ class ShopController extends Controller
             $cart->delete();
             $quantity = $quantity_temp;
             $total = $request->quantity * $data->unit_price;
-            return view('billing',compact('book','quantity','total'));
+            return view('billing',compact('book','quantity','total','category','shop'));
         }else{
             return redirect()->route('cart')->with('message', 'Your quantity of purchase cannot be higher in the number of books for sale. Please choose quantity 1 to '.$data->quantity.' only. Thanks!');
         }

@@ -72,6 +72,10 @@ class MainController extends Controller
     //Checkout book
     public function checkoutBooks(Request $request, $id)
     {
+        //Initializing caterogry and shop
+        $category = Category::with('assign_book_category')->get();
+        $shop = Shop::with('shop_book')->get();
+
         $book = ShopBook::where('id', $id)->get();
         $book->map(function ($item){
             $item_book = Book::findorfail($item->book_id);
@@ -89,7 +93,7 @@ class MainController extends Controller
         }elseif($data->quantity >= $quantity_temp ){
             $quantity = $quantity_temp;
             $total = $request->quantity * $data->unit_price;
-            return view('billing',compact('book','quantity','total'));
+            return view('billing',compact('book','quantity','total','category','shop'));
         }else{
             return redirect()->route('view.book.item',$id)->with('message', 'Your quantity of purchase cannot be higher in the number of books for sale. Please choose quantity 1 to '.$data->quantity.' only. Thanks!');
         }
@@ -247,6 +251,66 @@ class MainController extends Controller
         $category = Category::with('assign_book_category')->get();
         $shop = Shop::with('shop_book')->get();
         return view('seller-shop',compact('book','category','shop_name','shop','users','shop_book_cat'));
+    }
+
+    public function searchShopCat(Request $request)
+    {
+         //Initializing caterogry and shop
+         $category = Category::with('assign_book_category')->get();
+         $shop = Shop::with('shop_book')->get();
+
+        if($request->select_for == "Shop")
+        {
+            if($request->srch_for <> null){
+                $users = User::get();
+                //To get the designated user of shop
+                $shop_name = Shop::with('user_shop')->where('name',$request->srch_for)->get();
+                if($shop_name->isEmpty()){
+                    return redirect()->route('shop.not.found');
+                }else{
+                    $shop_name->map(function ($item){
+                        $user = $item->user_shop;
+                        $user->map(function($itemUser){
+                            $user_data = User::findOrFail($itemUser->user_id);
+                            $itemUser->first_name = $user_data->first_name;
+                            $itemUser->middle_name = $user_data->middle_name;
+                            $itemUser->last_name = $user_data->last_name;
+                            $itemUser->email = $user_data->email;
+                        });
+                    });
+                    foreach($shop_name as $data)
+                    $book = ShopBook::where('shop_id', $data->id)->get();
+                    $book->map(function ($item){
+                        $item_book = Book::findorfail($item->book_id);
+                        $item->name = $item_book->name;
+                        $item->unit_price = $item_book->unit_price;
+                        $item->image = $item_book->image;
+                        $item_shop = Shop::findorfail($item->shop_id);
+                        $item->shop_name = $item_shop->name;
+                    });
+                    $shop_book = Book::with('shop_book')->where('category', $request->srch_for)->paginate(12);
+        
+                    $shop_book_cat = Category::with('shop_book_category')->get();
+                   
+                    return view('seller-shop',compact('shop_book','category','shop','book','users','shop_name','shop_book_cat'));  
+                }
+            }
+            return view('shop-not-found-specific',compact('category','shop'));
+            
+        }else{
+            if($request->srch_for <> null)
+            {
+                $category_title = $request->select_for;
+                $shop_book = Book::with('shop_book')->where('category',$category_title)->where('name', "like","%".$request->srch_for."%")
+                ->orWhere('unit_price', "like","%".$request->srch_for."%")->paginate(12);
+                
+                return view('filtered-categories',compact('shop_book','category','shop','category_title'));
+            }
+            $category_title = $request->select_for;
+            $shop_book = Book::with('shop_book')->where('category', $category_title)->paginate(12);
+            
+            return view('filtered-categories',compact('shop_book','category','shop','category_title'));
+        }
     }
 
 

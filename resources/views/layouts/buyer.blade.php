@@ -114,31 +114,15 @@
                     <!-- Begin Header Middle Right Area -->
                     <div class="col-lg-9 pl-0 ml-sm-15 ml-xs-15">
                         <!-- Begin Header Middle Searchbox Area -->
-                        <form action="#" class="hm-searchbox">
-                            <select class="nice-select select-search-category">
-                                <option value="All">All</option>                         
-                                <option value="Literature & Fiction">Literature & Fiction</option>
-                                <option value="Arts & Music">Arts & Music</option>
-                                <option value="Comics">Comics</option>
-                                <option value="Biographies">Biographies</option>
-                                <option value="Mysteries">Mysteries</option>
-                                <option value="Sports">Sports</option>
-                                <option value="Medical">Medical</option>
-                                <option value="Business">Business</option>
-                                <option value="Cooking">Cooking</option>
-                                <option value="Comp & Tech">Comp & Tech</option>
-                                <option value="Education & Reference">Education & Reference</option>
-                                <option value="Sci-Fi & Fantasy">Sci-Fi & Fantasy</option>
-                                <option value="Entertainment">Entertainment</option>
-                                <option value="Health & Fitness">Health & Fitness</option>
-                                <option value="Mathematics">Mathematics</option>
-                                <option value="English">English</option>
-                                <option value="Science">Science</option>
-                                <option value="Filipino">Filipino</option>
-                                <option value="Health & Fitness">Horror</option>
-                                <option value="Health & Fitness">Romance</option>                                  
+                        <form action="{{route('search.shop.cat')}}" method="post" class="hm-searchbox">
+                            @csrf
+                            <select class="nice-select select-search-category" name="select_for">
+                                <option value="Shop">Shop</option>                         
+                                @foreach($category as $data)
+                                    <option value="{{$data->category_title}}">{{$data->category_title}}</option>
+                                @endforeach                                 
                             </select>
-                            <input type="text" placeholder="Enter your search key ...">
+                            <input type="text" name="srch_for" placeholder="Enter your search shop name or book title...">
                             <button class="li-btn" type="submit"><i class="fa fa-search"></i></button>
                         </form>
                         <!-- Header Middle Searchbox Area End Here -->

@@ -1,4 +1,6 @@
 <?php
+use App\Models\Shop;
+use App\Models\Category;
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\auth\LoginController;
@@ -70,10 +72,16 @@ Route::group(['middleware' => 'auth'], function () {
         //buy book
         Route::post('/buy/book', [ShopController::class, 'addTransaction'])->name('buy.book');
         Route::get('/transaction/succeeded', function () {
-            return view('order-succeeded');
+            //Initializing caterogry and shop
+            $category = Category::with('assign_book_category')->get();
+            $shop = Shop::with('shop_book')->get();
+            return view('order-succeeded',compact('category','shop'));
         })->name('book.transaction');
         Route::get('/transaction/not/allowed', function () {
-            return view('order-not-allow');
+            //Initializing caterogry and shop
+            $category = Category::with('assign_book_category')->get();
+            $shop = Shop::with('shop_book')->get();
+            return view('order-not-allow',compact('category','shop'));
         })->name('book.not.allowed');
         //Show list of transaction
         Route::put('/my-purchase/canceled', [PurchaseController::class, 'cancelBook'])->name('cancel.purchase');
@@ -97,3 +105,10 @@ Route::get('/filter-categories/{name}', [MainController::class, 'bookCategory'])
 Route::get('/filter-shop/{name}', [MainController::class, 'shopCategory'])->name('filter.shop.name');
 Route::get('/filter-shop-book/{name}/{parm1}/{parm2}', [MainController::class, 'shopBookCategory'])->name('filter.shop.book');
 Route::get('/sorting-categories/{name}', [MainController::class, 'bookSort'])->name('sorting.book');
+Route::post('/search', [MainController::class, 'searchShopCat'])->name('search.shop.cat');
+Route::get('/shop/not/found', function () {
+    //Initializing caterogry and shop
+    $category = Category::with('assign_book_category')->get();
+    $shop = Shop::with('shop_book')->get();
+    return view('shop-not-found',compact('category','shop'));
+})->name('shop.not.found');
