@@ -13,9 +13,10 @@
         @endif
         <div class="row">
             <div class="col-md-12 mb-3">
-                <form action="#">
+                <form action="{{route('search.user')}}" method="get" enctype="multipart/form-data">
+                  @csrf
                     <div class="input-group">
-                        <input type="search" class="form-control form-control-md" placeholder="Filter by status or name...   Example : Pending, Blocked or Name etc.">
+                        <input type="search" name="srch" class="form-control form-control-md" placeholder="Filter by status or name...   Example : Pending, Blocked or Name etc.">
                         <div class="input-group-append">
                             <button type="submit" class="btn btn-md btn-default">
                                 <i class="fa fa-search"></i>

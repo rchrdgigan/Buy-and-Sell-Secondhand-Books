@@ -66,15 +66,19 @@
                                 <td><span class="amount bg-success text-white rounded">Completed</span></td>
                                 @elseif($data->status == 'processing')
                                 <td><span class="amount bg-info text-white rounded">Processing</span></td>
+                                @elseif($data->status == 'canceled')
+                                <td><span class="amount bg-secondary text-white rounded">Canceled</span></td>
                                 @endif
                                 <td>
                                     <a type="button" class="btn btn-primary btn-sm"
                                     id="{{str_pad($data->id, 6, '0', STR_PAD_LEFT)}}"
+                                    trans_id="{{$data->id}}"
                                     book="{{$data->book_title}}"
                                     price="{{$data->unit_price}}"
                                     qty="{{$data->quantity}}"
                                     total="{{$data->total_price}}"
                                     status="{{$data->status}}"
+                                    reason="{{$data->reason}}"
                                     contact="{{$data->contact}}"
                                     image="/storage/book_image/{{$data->image}}"
                                     customer="{{$data->first_name}} {{$data->middle_name}} {{$data->last_name}}"
@@ -140,13 +144,21 @@
                     <div class="form-group h6">
                         <b>Status : </b> <span id="status"></span>
                     </div>  
+                    <div class="form-group h6">
+                        <b id="val_reason" style="display:none">Reason : </b> <span id="reason"></span>
+                    </div>  
                 </div>
             </div>
         </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-success btn-sm" data-dismiss="modal">Done</button>
-        </div>
+        <form action="{{route('transaction.finish')}}" method="post" id="complete_frm">
+            @method('PUT')
+            @csrf
+            <input type="text" name="id" hidden>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+                <button type="submit" id="val_button" style="display:none" class="btn btn-success btn-sm">Done</button>
+            </div>
+        </form>
     </div>
   </div>
 </div>

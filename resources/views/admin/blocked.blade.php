@@ -35,7 +35,7 @@
                 <td>{{$data->date_of_blocked}}</td>
                 <td><span class="bg-success rounded-circle p-1">blocked</span></td>
                 <td>
-                    <a href="" class="btn btn-primary .btn-md"><i class="nav-icon fas fa-eye"></i> View</a>
+                    <a href="{{route('view.reported',$data->id)}}" class="btn btn-primary .btn-md" ><i class="nav-icon fas fa-eye"></i> View</a>
                     <a href="{{route('unblock.status',['user_id'=> $data->user_id , 'status_code' => 'approved'])}}" class="btn btn-success .btn-md"><i class="nav-icon fas fa-check"></i> Unblock</a>
                 </td>
             </tr>

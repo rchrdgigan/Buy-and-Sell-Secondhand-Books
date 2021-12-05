@@ -255,6 +255,7 @@
 <script>
     $('#viewLog').on('show.bs.modal', function (e) {
         var opener=e.relatedTarget;
+        var trans_id=$(opener).attr('trans_id');
         var id=$(opener).attr('id');
         var book_title=$(opener).attr('book');
         var unit_price=$(opener).attr('price');
@@ -265,8 +266,10 @@
         var imgsrc=$(opener).attr('image');
         var customer=$(opener).attr('customer');
         var address=$(opener).attr('address');
+        var reason=$(opener).attr('reason');
 
         document.getElementById('trans_id').innerHTML = id;
+        $('#complete_frm').find('[name="id"]').val(trans_id);
         document.getElementById('book_title').innerHTML = book_title;
         document.getElementById('unit_price').innerHTML = unit_price;
         document.getElementById('quantity').innerHTML = quantity;
@@ -275,6 +278,18 @@
         document.getElementById('contact').innerHTML = contact;
         document.getElementById('customer').innerHTML = customer;
         document.getElementById('address').innerHTML = address;
+        if(reason === ""){
+            document.getElementById('val_button').style.display = "block";
+            document.getElementById('val_reason').style.display = "none";
+            document.getElementById('reason').innerHTML = reason;
+        }else{
+            document.getElementById('val_button').style.display = "none";
+            document.getElementById('val_reason').style.display = "block";
+            document.getElementById('reason').innerHTML = reason;
+        }
+        if(status === "completed"){
+            document.getElementById('val_button').style.display = "none";
+        }
         $('#image').attr('src',imgsrc);
 
     });

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use Carbon\Carbon;
 use App\Models\User;
+use App\Models\Category;
+use App\Models\Shop;
 use App\Models\ReportInfo;
 use App\Models\AssignReportedUser;
 
@@ -50,6 +52,8 @@ class AccountManagementController extends Controller
 
     public function reportedBy(Request $request, $user_id)
     {
+        $category = Category::with('assign_book_category')->get();
+        $shop = Shop::with('shop_book')->get();
         if(auth()->user()->id == $user_id)
         {
             return "Youre not allowed to report your own account!";
@@ -59,7 +63,7 @@ class AccountManagementController extends Controller
                 $existing_user = AssignReportedUser::where('reported_by_id', auth()->user()->id)->where('user_id', $user_id)->first();
                 if($existing_user)
                 {
-                    return view('seller-already-reported');
+                    return view('seller-already-reported', compact('category','shop'));
                 }
                 //create reported user
                 if($request->hasFile('prof'))
@@ -86,7 +90,7 @@ class AccountManagementController extends Controller
                     'reported_by_id' => auth()->user()->id,
                 ]);
                 if($report){
-                    return view('seller-reported-succeeded');
+                    return view('seller-reported-succeeded', compact('category','shop'));
                 }
 
             } catch (\Throwable $th) {
@@ -214,4 +218,61 @@ class AccountManagementController extends Controller
         }
     }
 
+    public function main()
+    {
+        $reported = AssignReportedUser::where('status', 'log')->get();
+        $user = User::get();
+        $blocked = AssignReportedUser::where('status', 'blocked')->get();
+        $count_r_user = $reported->count();
+        $count_user = $user->count();
+        $blocked_user = $blocked->count();
+        return view('admin.main', compact('count_r_user','count_user','blocked_user','reported'));
+    }
+
+    public function userReported($id)
+    {
+
+        $report = AssignReportedUser::where('report_info_id',$id)->get();
+        $report->map(function($item){
+            $reported_info = ReportInfo::findOrFail($item->report_info_id);
+            $item->reason = $reported_info->reason;
+            $item->valid_prof = $reported_info->upload_prof;
+            $user1_info = User::findOrFail($item->user_id);
+            $item->user_image = $user1_info->image;
+            $item->first_name = $user1_info->first_name;
+            $item->middle_name = $user1_info->middle_name;
+            $item->last_name = $user1_info->last_name;
+            $item->gender = $user1_info->gender;
+            $item->contact = $user1_info->contact;
+            $item->brgy = $user1_info->brgy;
+            $item->street = $user1_info->street;
+            $item->purok = $user1_info->purok;
+            $item->email = $user1_info->email;
+            $item->user_status = $user1_info->status;
+            $user2_info = User::findOrFail($item->reported_by_id);
+            $item->user2_image = $user2_info->image;
+            $item->first2_name = $user2_info->first_name;
+            $item->middle2_name = $user2_info->middle_name;
+            $item->last2_name = $user2_info->last_name;
+            $item->gender2 = $user2_info->gender;
+            $item->contact2 = $user2_info->contact;
+            $item->brgy2 = $user2_info->brgy;
+            $item->street2 = $user2_info->street;
+            $item->purok2 = $user2_info->purok;
+            $item->email2 = $user2_info->email;
+            $item->user2_status = $user2_info->status;
+
+        });
+        return view('admin.view-reported-user',compact('report'));
+    }
+
+    public function searchUser(Request $request)
+    {
+        $search = $request->get('srch');
+        $user_data = User::where("status","like","%".$search."%")
+            ->orWhere("first_name","like","%".$search."%")
+            ->orWhere("middle_name","like","%".$search."%")
+            ->orWhere("last_name","like","%".$search."%")->paginate(9);
+        return view('admin.user-management',compact('user_data'));
+    }
 }

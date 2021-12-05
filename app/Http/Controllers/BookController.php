@@ -36,13 +36,13 @@ class BookController extends Controller
             return back()->with('message','Please set your shop information. Before you sell books. Thanks!');
         }else {
             $validated = $request->validate([
-                'name' => ['required', 'string', 'max:255'],
-                'description' => ['required', 'string', 'max:255'],
-                'details' => ['required', 'string', 'max:255'],
-                'quantity' => ['required', 'string', 'max:255'],
-                'categories' => ['required', 'string', 'max:255'],
-                'unit_price' => ['required', 'string', 'max:255'],
-                'total_amount' => ['required', 'string', 'max:255'],
+                'name' => ['required','max:255'],
+                'description' => ['required','max:255'],
+                'details' => ['required','max:255'],
+                'quantity' => ['required','max:255'],
+                'categories' => ['required','max:255'],
+                'unit_price' => ['required','max:255'],
+                'total_amount' => ['required','max:255'],
                 'image'         => 'nullable|image|file|max:5000',
             ]);
             if($request->hasFile('image'))

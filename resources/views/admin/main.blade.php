@@ -7,7 +7,7 @@
           <!-- small box -->
           <div class="small-box bg-info">
             <div class="inner">
-              <h3>0</h3>
+              <h3>{{$count_r_user}}</h3>
               <p>Reported</p>
             </div>
             <div class="icon">
@@ -21,7 +21,7 @@
           <!-- small box -->
           <div class="small-box bg-success">
             <div class="inner">
-              <h3>0</h3>
+              <h3>{{$count_user}}</h3>
               <p>Users</p>
             </div>
             <div class="icon">
@@ -35,7 +35,7 @@
           <!-- small box -->
           <div class="small-box bg-danger">
             <div class="inner">
-              <h3>0</h3>
+              <h3>{{$blocked_user}}</h3>
               <p>Blocked</p>
             </div>
             <div class="icon">
@@ -62,16 +62,18 @@
             </tr>
             </thead>
             <tbody>
+            @foreach($reported->where('status', 'log') as $data)
             <tr>
-                <td hidden="">No.</td>
-                <td>Full Name</td>
-                <td>Date of Reported</td>
-                <td><span class="bg-success rounded-circle p-1">active</span></td>
+                <td hidden="">{{$data->id}}</td>
+                <td>{{$data->first_name}} {{$data->middle_name}} {{$data->last_name}}</td>
+                <td>{{$data->created_at}}</td>
+                <td><span class="bg-success rounded-circle p-1">normal</span></td>
                 <td>
-                    <a href="" class="btn btn-primary .btn-md"><i class="nav-icon fas fa-eye"></i> View</a>
-                    <a href="" class="btn btn-danger .btn-md"><i class="nav-icon fas fa-times-circle"></i> Block</a>
+                    <a href="{{route('view.reported',$data->id)}}" class="btn btn-primary .btn-md" ><i class="nav-icon fas fa-eye"></i> View</a>
+                    <a href="{{route('block.status',['user_id'=> $data->user_id , 'status_code' => 'blocked'])}}" class="btn btn-danger .btn-md"><i class="nav-icon fas fa-times-circle"></i> Block</a>
                 </td>
             </tr>
+            @endforeach
             </tbody>
         </table>
         </div>

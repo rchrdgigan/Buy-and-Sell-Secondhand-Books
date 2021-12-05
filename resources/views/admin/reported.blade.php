@@ -25,7 +25,7 @@
                 <td>{{$data->created_at}}</td>
                 <td><span class="bg-success rounded-circle p-1">normal</span></td>
                 <td>
-                    <a href="" class="btn btn-primary .btn-md"><i class="nav-icon fas fa-eye"></i> View</a>
+                    <a href="{{route('view.reported',$data->id)}}" class="btn btn-primary .btn-md" ><i class="nav-icon fas fa-eye"></i> View</a>
                     <a href="{{route('block.status',['user_id'=> $data->user_id , 'status_code' => 'blocked'])}}" class="btn btn-danger .btn-md"><i class="nav-icon fas fa-times-circle"></i> Block</a>
                 </td>
             </tr>

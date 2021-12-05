@@ -28,11 +28,9 @@ Route::post('/login/admin', [LoginController::class,'adminLogin']);
 Route::group(['middleware' => 'auth:admin'], function () {
     Route::prefix('admin')->group(function(){
         //admin
-        Route::get('main', function () {
-            return view('admin.main');
-        })->name('admin.main');
-
+        Route::get('main', [AccountManagementController::class, 'main'])->name('admin.main');
         Route::get('users', [AccountManagementController::class, 'showUsers'])->name('admin.users');
+        Route::get('/srch/user', [AccountManagementController::class, 'searchUser'])->name('search.user');
         Route::get('/users/status/{user_id}/{status_code}', [AccountManagementController::class, 'updateStatus'])->name('update.status');
         Route::delete('/users/delete/{id}',[AccountManagementController::class, 'destroy'])->name('destroy.user');
 
@@ -42,11 +40,7 @@ Route::group(['middleware' => 'auth:admin'], function () {
         Route::get('/users/unblock/{user_id}/{status_code}', [AccountManagementController::class, 'unblockStatus'])->name('unblock.status');
         Route::get('users/history',[AccountManagementController::class, 'listHistory'])->name('admin.history');
         Route::delete('/users/history/{id}',[AccountManagementController::class, 'delReport'])->name('reported.del');
-
-        Route::get('user/profile', function () {
-            return view('admin.user-profile');
-        })->name('user.profile');
-
+        Route::get('users/reported/{id}',[AccountManagementController::class, 'userReported'])->name('view.reported');
     });
 });
 
@@ -93,6 +87,7 @@ Route::group(['middleware' => 'auth'], function () {
         //Show Customer
         Route::get('/myshop/customer', [ShopController::class, 'showCustomer'])->name('view.customer.list');
         Route::put('/myshop/transaction/approved', [ShopController::class, 'inprocessBook'])->name('transaction.processing');
+        Route::put('/myshop/transaction/finish', [ShopController::class, 'finishTransaction'])->name('transaction.finish');
         Route::get('/myshop/transaction/history', [ShopController::class, 'displayInprocess'])->name('display.processing');
 
         //Report USer

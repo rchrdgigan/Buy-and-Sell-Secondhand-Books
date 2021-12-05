@@ -282,9 +282,18 @@ class ShopController extends Controller
             $item_customer->quantity = $order->quantity;
             $item_customer->total_price = $order->total_price;
             $item_customer->status = $order->status;
+            $item_customer->reason = $order->reason;
         });
         return view('transaction-purchase-inprocess',compact('customer'));
     }
 
+    public function finishTransaction(Request $request)
+    {
+        $user_order = Transaction::findOrFail($request->id);
+        $user_order->status = 'completed';
+        $user_order->update();
+
+        return back()->with('message','Successfully mark as completed transaction. Thanks!');
+    }
 
 }

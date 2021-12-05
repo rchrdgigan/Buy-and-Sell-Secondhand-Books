@@ -43,14 +43,14 @@
                             </tr>
                         </thead>
                         <tbody>
-                        @foreach($user_order->where('status','finish') as $data)   
+                        @foreach($user_order->where('status','completed') as $data)   
                             <tr>
                                 <td><a href="#"><img height="75" src="/storage/book_image/{{$data->image}}"></a></td>
                                 <td><a href="#">{{$data->book_title}}</a></td>
                                 <td><span class="amount">{{$data->unit_price}}</span></td>
                                 <td><span class="amount">{{$data->quantity}}</span></td>
                                 <td><span class="amount">{{$data->total_price}}</span></td>
-                                <td><span class="amount bg-success text-white rounded">finish</span></td>
+                                <td><span class="amount bg-success text-white rounded">{{$data->status}}</span></td>
                                 <td>
                                     <a type="button" class="btn btn-primary btn-sm"
                                         id="{{str_pad($data->id, 6, '0', STR_PAD_LEFT)}}"

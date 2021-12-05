@@ -32,7 +32,7 @@
                     <form action="{{route('reported.del',$data->id)}}" method="post">
                         @method("DELETE")
                         @csrf
-                        <a href="" class="btn btn-primary .btn-md"><i class="nav-icon fas fa-eye"></i> View</a>
+                        <a href="{{route('view.reported',$data->id)}}" class="btn btn-primary .btn-md" ><i class="nav-icon fas fa-eye"></i> View</a>
                         <button type="submit" class="btn btn-danger .btn-md"><i class="nav-icon fas fa-trash"></i> Delete</button>
                     </form>
                 </td>

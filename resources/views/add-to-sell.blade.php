@@ -133,11 +133,15 @@
                     </div>
                     
                     <div class="form-group">
-                      <label for="description" class="p-1">Book Description :</label>
-                      <textarea id="summernoteDescription" type="text"  name="description" class="@error('description') is-invalid @enderror form-control" 
-                              placeholder="Enter Book Description" required></textarea>
+                      <label for="summernoteDescription" class="p-1">Book Description :</label>
+                      <textarea id="summernoteDescription" type="text"  name="description" value="{{ old('description') }}" class="form-control @error('description') is-invalid @enderror" 
+                      autocomplete="description" placeholder="Enter Book Description" required></textarea>
                     </div>
-
+                    @error('description')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                     <div class="form-group">
                       <label for="details" class="p-1">Book Details :</label>
                       <textarea id="summernoteDetails" type="text"  name="details" class="@error('details') is-invalid @enderror form-control" 
