@@ -34,7 +34,7 @@
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     <div class="text-center">
-                        <img class="rounded-circle" src="{{asset('vendor/images/logo.png')}}" height="30">
+                        <img class="rounded-circle" src="{{asset('vendor/images/logo.PNG')}}" height="30">
                         {{ config('app.name', 'Laravel') }}
                     </div>
                    
