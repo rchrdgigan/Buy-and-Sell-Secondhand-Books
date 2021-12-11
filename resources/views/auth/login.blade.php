@@ -24,7 +24,7 @@
                 
                 <h2 class="text-secondary mb-4 text-uppercase" style="font-family:Algerian">Admin Login</h2>
                 @else
-                <img class="mb-4 rounded-circle" src="{{asset('vendor/images/logo.png')}}" height="150">
+                <img class="mb-4 rounded-circle" src="{{asset('vendor/images/logo.PNG')}}" height="150">
                 @endif
             </div>
             @isset($url)

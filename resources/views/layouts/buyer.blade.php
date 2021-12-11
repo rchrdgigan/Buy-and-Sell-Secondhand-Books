@@ -55,7 +55,7 @@
                 <!-- Begin Header Top Left Area -->
                 <div class="col-lg-3 col-md-4">
                 <a href="{{ url('/') }}">
-                    <img class="rounded-circle" src="{{asset('vendor/images/logo.png')}}" height="30">
+                    <img class="rounded-circle" src="{{asset('vendor/images/logo.PNG')}}" height="30">
                     {{ config('app.name', 'Laravel') }}
                 </a>
                 </div>
