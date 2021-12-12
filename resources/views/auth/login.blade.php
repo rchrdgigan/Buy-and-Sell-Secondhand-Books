@@ -27,12 +27,11 @@
                 @endif
             </div>
             @isset($url)
-            <form method="POST" class="form-signin" action="{{ url('login/$url') }}">
-                @csrf
+            <form method="POST" class="form-signin" action='{{ url("login/$url") }}'>
             @else
             <form method="POST" class="form-signin" action="{{ route('login') }}">
-                @csrf
             @endisset
+                @csrf
                 <div class="form-group row">
                     <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
