@@ -27,9 +27,9 @@
                 @endif
             </div>
             @isset($url)
-            <form method="POST" class="form-signin" action='{{ url("login/$url") }}' aria-label="{{ __('Login') }}">
+            <form method="POST" class="form-signin" action="{{ url('login/$url') }}">
             @else
-            <form method="POST" class="form-signin" action="{{ route('login') }}" aria-label="{{ __('Login') }}">
+            <form method="POST" class="form-signin" action="{{ route('login') }}">
             @endisset
                 @csrf
                 <div class="form-group row">

@@ -18,12 +18,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('login/admin', [LoginController::class, 'showAdminLoginForm']);
+Route::post('login/admin', [LoginController::class,'adminLogin']);
+
 Auth::routes();
 //Display Book In Main Page
 Route::get('/', [MainController::class, 'mainPageBooks'])->name('welcome');
-
-Route::get('/login/admin', [LoginController::class, 'showAdminLoginForm']);
-Route::post('/login/admin', [LoginController::class,'adminLogin']);
 
 Route::group(['middleware' => 'auth:admin'], function () {
     Route::prefix('admin')->group(function(){
