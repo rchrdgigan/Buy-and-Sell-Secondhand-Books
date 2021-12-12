@@ -18,10 +18,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('login/admin-auth', function () {
-    return view('auth.login',['url' => 'admin']);
-});
-Route::post('login/admin-auth', [LoginController::class,'adminLogin']);
+Route::get('login/admin', [LoginController::class,'showAdminLoginForm']);
+Route::post('login/admin', [LoginController::class,'adminLogin']);
 
 Auth::routes();
 //Display Book In Main Page

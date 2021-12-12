@@ -27,7 +27,7 @@
                 @endif
             </div>
             @isset($url)
-            <form method="POST" class="form-signin" action="{{ url('admin/login') }}">
+            <form method="POST" class="form-signin" action="{{ url('login/$url') }}">
                 @csrf
             @else
             <form method="POST" class="form-signin" action="{{ route('login') }}">
