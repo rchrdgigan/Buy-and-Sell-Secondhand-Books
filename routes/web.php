@@ -3,7 +3,7 @@ use App\Models\Shop;
 use App\Models\Category;
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\auth\LoginController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\{
     UserController,
     HomeController,
@@ -21,7 +21,7 @@ Route::get('/', function () {
 Route::get('login/admin-auth', function () {
     return view('auth.login',['url' => 'admin']);
 });
-Route::post('admin/login', [LoginController::class,'adminLogin'])->name('admin.login');
+Route::post('login/admin-auth', [LoginController::class,'adminLogin']);
 
 Auth::routes();
 //Display Book In Main Page

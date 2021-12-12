@@ -49,12 +49,11 @@ class LoginController extends Controller
             'email' => 'required|email',
             'password' => 'required|min:8'
         ]);
-        return $request->email;
-        // if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) {
-        //     return redirect()->intended('/admin/main');
-        // }else{
-        //     return back()->with('fail','Incorect email and password! Please try again later..');
-        // }
-        // return back()->withInput($request->only('email', 'remember'));
+        if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) {
+            return redirect()->intended('/admin/main');
+        }else{
+            return back()->with('fail','Incorect email and password! Please try again later..');
+        }
+        return back()->withInput($request->only('email', 'remember'));
     }
 }
