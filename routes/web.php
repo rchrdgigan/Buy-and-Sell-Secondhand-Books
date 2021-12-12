@@ -21,7 +21,7 @@ Route::get('/', function () {
 Route::get('login/admin-auth', function () {
     return view('auth.login',['url' => 'admin']);
 });
-Route::post('login/admin', [LoginController::class,'adminLogin'])->name('admin.login');
+Route::post('login/admin-auth', [LoginController::class,'adminLogin'])->name('admin.login');
 
 Auth::routes();
 //Display Book In Main Page
