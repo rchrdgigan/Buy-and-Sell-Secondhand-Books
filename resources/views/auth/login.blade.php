@@ -19,9 +19,8 @@
                 </div>
             @endif
             <div class="text-center mt-4">
-                @if(request()->route()->getName() == 'admin.login')
+                @isset($url)
                 <img src="{{asset('vendor/images/admin-with-cogwheels-svgrepo-com.svg')}}" height="150">
-                
                 <h2 class="text-secondary mb-4 text-uppercase" style="font-family:Algerian">Admin Login</h2>
                 @else
                 <img class="mb-4 rounded-circle" src="{{asset('vendor/images/logo.PNG')}}" height="150">
