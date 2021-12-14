@@ -36,13 +36,13 @@ class BookController extends Controller
             return back()->with('message','Please set your shop information. Before you sell books. Thanks!');
         }else {
             $validated = $request->validate([
-                'name' => ['required','max:255'],
-                'description' => ['required','max:255'],
-                'details' => ['required','max:255'],
-                'quantity' => ['required','max:255'],
-                'categories' => ['required','max:255'],
-                'unit_price' => ['required','max:255'],
-                'total_amount' => ['required','max:255'],
+                'name' => ['required','max:999'],
+                'description' => ['required','max:999'],
+                'details' => ['required','max:999'],
+                'quantity' => ['required','max:999'],
+                'categories' => ['required','max:999'],
+                'unit_price' => ['required','max:999'],
+                'total_amount' => ['required','max:999'],
                 'image'         => 'nullable|image|file|max:5000',
             ]);
             if($request->hasFile('image'))
@@ -51,7 +51,7 @@ class BookController extends Controller
                 $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
                 $extension = $request->file('image')->getClientOriginalExtension();
                 $fileNameToStore = $filename.'_'.time().'.'.$extension;
-                $path = $request->file('image')->storeAs('public/book_image',$fileNameToStore);
+                $path = $request->file('image')->storeAs('public/book_image/',$fileNameToStore);
             }
             else
             {
