@@ -80,7 +80,7 @@ class RegisterController extends Controller
             $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
             $extension = $data['image']->getClientOriginalExtension();
             $file_image = $filename.'_'.time().'.'.$extension;
-            $path = $data['image']->storeAs('public/users_image',$file_image);
+            $path = $data['image']->move('public/users_image/',$file_image);
         }
         else
         {
@@ -93,7 +93,7 @@ class RegisterController extends Controller
             $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
             $extension = $data['valid_id']->getClientOriginalExtension();
             $file_valid_id = $filename.'_'.time().'.'.$extension;
-            $path = $data['valid_id']->storeAs('public/valid_prof',$file_valid_id);
+            $path = $data['valid_id']->move('public/valid_prof/',$file_valid_id);
         }
         else
         {
