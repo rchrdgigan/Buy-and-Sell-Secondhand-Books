@@ -52,7 +52,7 @@
                                 <div class="card-body">
                                     <div class="picture-container mb-2">
                                         <div class="picture">
-                                            <img src="/storage/users_image/{{$data->user_image}}" class="rounded-circle text-center" width="100px;" height="100px;">
+                                            <img src="/public/users_image/{{$data->user_image}}" class="rounded-circle text-center" width="100px;" height="100px;">
                                         </div>
                                     </div>
                                     <h6 class="profile-username text-center mb-3 p-2">{{$data->first_name}} {{$data->middle_name}} {{$data->last_name}}</h6>
@@ -78,7 +78,7 @@
                                             available="{{$data->available}}"
                                             details="{{$data->details}}"
                                             description="{{$data->description}}"
-                                            image="/storage/book_image/{{$data->image}}"
+                                            image="/public/book_image/{{$data->image}}"
                                             data-toggle="modal" 
                                             data-target="#viewBook">
                                             <b>More Info</b></button>

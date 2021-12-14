@@ -25,7 +25,7 @@
                     <div class="product-details-images slider-navigation-1">
                         <div class="lg-image">
                             <a class="popup-img venobox vbox-item" href="" data-gall="myGallery">
-                                <img height="500" src="/storage/book_image/{{$data->image}}" alt="product image">
+                                <img height="500" src="/public/book_image/{{$data->image}}" alt="product image">
                             </a>
                         </div>
                     </div>
@@ -108,7 +108,7 @@
                             <div class="single-product-wrap">
                                 <div class="product-image">
                                     <a href="{{route('view.book.item',$same_data->id)}}">
-                                        <img height="250" src="/storage/book_image/{{$same_data->image}}">
+                                        <img height="250" src="/public/book_image/{{$same_data->image}}">
                                     </a>
                                     <span class="sticker">New</span>
                                 </div>

@@ -32,7 +32,7 @@
                                         <div class="single-product-wrap">
                                             <div class="product-image">
                                                 <a href="{{route('view.book.item',$data->id)}}">
-                                                    <img height="300" src="/storage/book_image/{{$data->image}}">
+                                                    <img height="300" src="/public/book_image/{{$data->image}}">
                                                 </a>
                                             </div>
                                             <div class="product_desc">
@@ -85,7 +85,7 @@
                     @endif
                     @endguest
                     <ul>
-                        <li><a href=""><img height="150" width="150" src="/storage/users_image/{{$user->image}}" class="rounded-circle mb-2" alt="" /></a></li>
+                        <li><a href=""><img height="150" width="150" src="/public/users_image/{{$user->image}}" class="rounded-circle mb-2" alt="" /></a></li>
                         <h3>{{$udata->name}}</h3>
                         <li><a href="">Name: {{$user->first_name}}  {{$user->middle_name}} {{$user->last_name}}</a></li>
                         <li><a href="">Email: {{$user->email}}</a></li>

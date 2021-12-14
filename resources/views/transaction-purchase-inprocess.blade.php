@@ -57,7 +57,7 @@
                         <tbody>
                         @forelse($customer->where('status', '<>' , 'pending') as $data)
                             <tr>
-                                <td><img height="75" src="/storage/book_image/{{$data->image}}"></td>
+                                <td><img height="75" src="/public/book_image/{{$data->image}}"></td>
                                 <td><span>{{$data->book_title}}</a></td>
                                 <td><span class="amount">{{$data->unit_price}}</span></td>
                                 <td><span class="amount">{{$data->quantity}}</span></td>
@@ -80,7 +80,7 @@
                                     status="{{$data->status}}"
                                     reason="{{$data->reason}}"
                                     contact="{{$data->contact}}"
-                                    image="/storage/book_image/{{$data->image}}"
+                                    image="/public/book_image/{{$data->image}}"
                                     customer="{{$data->first_name}} {{$data->middle_name}} {{$data->last_name}}"
                                     address="{{$data->brgy}} {{$data->street}} {{$data->purok}}"
                                     data-toggle="modal" 

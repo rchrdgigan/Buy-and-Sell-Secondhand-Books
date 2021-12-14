@@ -51,7 +51,7 @@
                                         <span aria-hidden="true">&times;</span>
                                     </a>
                                 </td>
-                                <td><a href="#"><img height="75" src="/storage/book_image/{{$data->image}}"></a></td>
+                                <td><a href="#"><img height="75" src="/public/book_image/{{$data->image}}"></a></td>
                                 <td><a href="#">{{$data->book_title}}</a></td>
                                 <td><span class="amount">{{$data->unit_price}}</span></td>
                                 <td><span class="amount">{{$data->quantity}}</span></td>
@@ -65,7 +65,7 @@
                                     qty="{{$data->quantity}}"
                                     total="{{$data->total_price}}"
                                     status="{{$data->status}}"
-                                    image="/storage/book_image/{{$data->image}}"
+                                    image="/public/book_image/{{$data->image}}"
                                     shop="{{$data->shop_name}}"
                                     address="{{$data->address}}"
                                     contact="{{$data->contact}}"
