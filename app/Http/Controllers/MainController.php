@@ -100,7 +100,6 @@ class MainController extends Controller
         
     }
 
-    //Display all books in filter category page
     public function allBooks()
     {
         $sortBy = "asc";
@@ -120,7 +119,6 @@ class MainController extends Controller
         return view('filter-categories',compact('shop_book','category','shop','sortBy'));
     }
 
-    //Filter A-Z and Z-A All Books
     public function bookAllSort()
     {
         if($_GET['sortBy'] == "a-z"){
