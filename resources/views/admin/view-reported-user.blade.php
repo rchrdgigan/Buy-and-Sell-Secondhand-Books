@@ -14,7 +14,7 @@
                        <b>Reported User:</b> 
                     </div>
                     <div class="text-center">
-                        <img class="profile-user-img img-fluid img-circle" src="/storage/users_image/{{$data->user_image}}" alt="User profile picture">
+                        <img class="profile-user-img img-fluid img-circle" src="/public/users_image/{{$data->user_image}}" alt="User profile picture">
                     </div>
                     <p class="profile-username text-center text-md">{{$data->first_name}} {{$data->middle_name}} {{$data->last_name}}</p>
 
@@ -52,7 +52,7 @@
                                 <b>Reported by:</b>   
                             </div>
                             <div class="text-center">
-                                <img class="profile-user-img img-fluid img-circle" src="/storage/users_image/{{$data->user2_image}}" alt="User profile picture">
+                                <img class="profile-user-img img-fluid img-circle" src="/public/users_image/{{$data->user2_image}}" alt="User profile picture">
                             </div>
                             <p class="profile-username text-center text-md">{{$data->first2_name}} {{$data->middle2_name}} {{$data->last2_name}}</p>
 
@@ -90,7 +90,7 @@
                             </div>
                             <div class="text-header">
                                 <b>Uploaded Proof:</b><br>
-                                <a href="/storage/report_prof/{{$data->valid_prof}}">View proof</a>
+                                <a href="/public/report_prof/{{$data->valid_prof}}">View proof</a>
                             </div>
                         </div>
                     </div>

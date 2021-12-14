@@ -39,7 +39,7 @@
                         @method('DELETE')
                         @csrf
                         <div class="dropdown-menu" style="">
-                          <a class="dropdown-item text-sm" href="../storage/valid_prof/{{$data->valid_prof}}"><i class="fas fa-eye text-primary"></i> View ID</a>
+                          <a class="dropdown-item text-sm" href="../public/valid_prof/{{$data->valid_prof}}"><i class="fas fa-eye text-primary"></i> View ID</a>
                           @if($data->status == "approved")
                             
                           @elseif($data->status == "pending")
@@ -51,7 +51,7 @@
                     </div>
                     <div class="card-body box-profile p-2">
                     <div class="text-center">
-                        <img class="profile-user-img img-fluid img-circle" src="../storage/users_image/{{$data->image}}" alt="User profile picture">
+                        <img class="profile-user-img img-fluid img-circle" src="../public/users_image/{{$data->image}}" alt="User profile picture">
                     </div>
                     <p class="profile-username text-center text-md">{{$data->first_name}} {{$data->middle_name}} {{$data->last_name}}</p>
 

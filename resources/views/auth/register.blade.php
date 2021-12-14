@@ -13,7 +13,7 @@
                         <div class="container">
                             <div class="picture-container">
                                 <div class="picture">
-                                    <img src="/storage/users_image/" class="picture-src" id="wizardPicturePreview" title="">
+                                    <img src="/public/users_image/{{old('image')}}" class="picture-src" id="wizardPicturePreview" title="">
                                     <input type="file" name="image" id="wizard-picture" class="" required>
                                     <h6 class="">Choose Picture</h6>
                                 </div>
