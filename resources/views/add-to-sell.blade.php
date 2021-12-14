@@ -160,20 +160,20 @@
                     <div class="row">
                       <div class="form-group col-6">
                         <label for="quantity" class="p-1">Quantity :</label>
-                        <input id="quantity" name="quantity" type="text" onchange="multiply()" class="@error('quantity') is-invalid @enderror form-control" 
+                        <input id="quantity" name="quantity" type="number" onchange="multiply()" class="@error('quantity') is-invalid @enderror form-control" 
                                 placeholder="Enter Quantity" required>
                       </div>
 
                       <div class="form-group col-6">
                         <label for="unit_price" class="p-1">Unit Price :</label>
-                        <input id="unit_price" name="unit_price" type="text" onchange="multiply()" class="@error('unit_price') is-invalid @enderror form-control" 
+                        <input id="unit_price" name="unit_price" type="number" onchange="multiply()" class="@error('unit_price') is-invalid @enderror form-control" 
                                 placeholder="Enter Unit Price" required>
                       </div>
                     </div>
 
                     <div class="form-group">
                       <label for="total_amount" class="p-1">Total Amount :</label>
-                      <input id="total_amount" name="total_amount" type="text" class="@error('total_amount') is-invalid @enderror form-control" 
+                      <input id="total_amount" name="total_amount" type="number" class="@error('total_amount') is-invalid @enderror form-control" 
                               value="0" required>
                     </div>
                 </div>

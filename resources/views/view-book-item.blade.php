@@ -108,7 +108,7 @@
                             <div class="single-product-wrap">
                                 <div class="product-image">
                                     <a href="{{route('view.book.item',$same_data->id)}}">
-                                        <img height="250" src="/storage/book_image/{{$same_data->image}}" alt="Li's Product Image">
+                                        <img height="250" src="/storage/book_image/{{$same_data->image}}">
                                     </a>
                                     <span class="sticker">New</span>
                                 </div>

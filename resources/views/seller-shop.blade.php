@@ -32,7 +32,7 @@
                                         <div class="single-product-wrap">
                                             <div class="product-image">
                                                 <a href="{{route('view.book.item',$data->id)}}">
-                                                    <img height="300" src="/storage/book_image/{{$data->image}}" alt="Li's Product Image">
+                                                    <img height="300" src="/storage/book_image/{{$data->image}}">
                                                 </a>
                                             </div>
                                             <div class="product_desc">
