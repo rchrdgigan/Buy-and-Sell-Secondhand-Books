@@ -25,7 +25,7 @@
                 <div class="container">
                     <div class="picture-container">
                         <div class="picture">
-                            <img src="/storage/users_image/{{auth()->user()->image}}" class="picture-src" id="wizardPicturePreview" title="">
+                            <img src="{{ asset('public/users_image/auth()->user()->image') }}" class="picture-src" id="wizardPicturePreview" title="">
                             <input type="file" name="image" id="wizard-picture" class="">
                         </div>
                         <h6 class="">Choose Picture</h6>
