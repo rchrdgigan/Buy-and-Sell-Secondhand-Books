@@ -33,7 +33,7 @@ class UserController extends Controller
             $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
             $extension = $request->file('image')->getClientOriginalExtension();
             $fileNameToStore = $filename.'_'.time().'.'.$extension;
-            $path = $request->file('image')->storeAs('public/users_image/',$fileNameToStore);
+            $path = $request->file('image')->move('public/users_image/',$fileNameToStore);
             $user->image = $fileNameToStore;
         }
         $user->update();
