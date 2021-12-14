@@ -37,12 +37,12 @@ class BookController extends Controller
         }else {
             $validated = $request->validate([
                 'name' => ['required','max:999'],
-                'description' => ['required','max:999'],
+                'description' => 'required','max:999',
                 'details' => ['required','max:999'],
-                'quantity' => ['required','max:999'],
-                'categories' => ['required','max:999'],
-                'unit_price' => ['required','max:999'],
-                'total_amount' => ['required','max:999'],
+                'quantity' => ['required'],
+                'categories' => ['required'],
+                'unit_price' => ['required'],
+                'total_amount' => ['required'],
                 'image'         => 'nullable|image|file|max:5000',
             ]);
             if($request->hasFile('image'))
