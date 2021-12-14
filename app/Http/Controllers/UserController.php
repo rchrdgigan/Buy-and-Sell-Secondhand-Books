@@ -24,7 +24,7 @@ class UserController extends Controller
         $user->email = $request->email;
         if($request->hasFile('image'))
         {
-            $location = '/public/users_image/'.$user->image;
+            $location = 'public/users_image/'.$user->image;
             if(File::exists($location))
             {
                 File::delete($location);
@@ -33,7 +33,7 @@ class UserController extends Controller
             $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
             $extension = $request->file('image')->getClientOriginalExtension();
             $fileNameToStore = $filename.'_'.time().'.'.$extension;
-            $path = $request->file('image')->storeAs('/public/users_image/',$fileNameToStore);
+            $path = $request->file('image')->storeAs('public/users_image/',$fileNameToStore);
             $user->image = $fileNameToStore;
         }
         $user->update();
