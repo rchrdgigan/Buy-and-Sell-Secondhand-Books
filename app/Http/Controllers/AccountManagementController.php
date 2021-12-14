@@ -72,7 +72,7 @@ class AccountManagementController extends Controller
                     $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
                     $extension = $request->file('prof')->getClientOriginalExtension();
                     $fileNameToStore = $filename.'_'.time().'.'.$extension;
-                    $path = $request->file('prof')->storeAs('public/report_prof/',$fileNameToStore);
+                    $path = $request->file('prof')->storeAs('/public/report_prof/',$fileNameToStore);
                 }
                 else
                 {
