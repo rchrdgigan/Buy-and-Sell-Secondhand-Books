@@ -66,7 +66,7 @@
                                         <span aria-hidden="true">&times;</span>
                                     </a>
                                 </td>
-                                <td><a href="#"><img height="75" src="/public/book_image/{{$data->image}}"></a></td>
+                                <td><a href="#"><img height="75" src="{{asset('public/book_image/<php? $data->image ?>')}}"></a></td>
                                 <td><a href="#">{{$data->name}}</a></td>
                                 <td>{{$data->category}}</td>
                                 <td><span class="amount">{{$data->unit_price}}</span></td>
@@ -82,7 +82,7 @@
                                     price="{{$data->unit_price}}"
                                     quantity="{{$data->quantity}}"
                                     total="{{$data->total_amount}}"
-                                    image="/public/book_image/{{$data->image}}"
+                                    image="/storage/book_image/{{$data->image}}"
 
                                     data-toggle="modal" data-target="#viewBooks">
                                         View
