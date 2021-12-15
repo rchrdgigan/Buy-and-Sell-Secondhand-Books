@@ -43,7 +43,12 @@
                         <div class="product-desc">
                             <?php echo nl2br(html_entity_decode($data->description)) ?>
                         </div>
-                        <div><span class="bg-warning rounded p-1">{{$data->quantity}}pcs - Available</span>
+                        <div>
+                            @if($data->quantity <> 0)
+                            <span class="bg-warning rounded p-1">{{$data->quantity}}pcs - Available</span>
+                            @else
+                            <span class="bg-danger text-white rounded p-1">Not Available</span>
+                            @endif
                         </div>
                         <div class="single-add-to-cart">
                             <form action="{{route('billing',$data->id)}}" method="POST" class="cart-quantity">

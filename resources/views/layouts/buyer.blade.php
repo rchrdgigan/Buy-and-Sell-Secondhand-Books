@@ -194,13 +194,15 @@
                                             </li>
                                         </ul>
                                     </li>
-                                    <li class="megamenu-holder"><a href="#">About Us</a>
+                                    <li class="megamenu-holder"><a href="{{url('/about')}}">About Us</a>
                                         <ul class="megamenu hb-megamenu">
-                                            <li><a href="#">Book - Shopping in Bulan</a>
+                                            <li><a href="{{url('/about')}}">Book - Shopping in Bulan</a>
+                                            @if(request()->route()->getName()=='about')
                                                 <ul>
-                                                    <li><a href="#">Bulan Area Only</a></li>
-                                                    <li><a href="#">No Valid ID - No to Shopping</a></li>
+                                                    <li><a href="#bulan">Bulan Area Only</a></li>
+                                                    <li><a href="#notvalid">No Valid ID - No to Shopping</a></li>
                                                 </ul>
+                                            @endif
                                             </li>
                                         </ul>
                                     </li>

@@ -45,7 +45,7 @@
                             <div class="product-area shop-product-area">
                                 <div class="row">
                                 @foreach($shop_book as $data)
-                                    <div class="col-lg-4 col-md-4 col-sm-6 mt-40">
+                                    <div class="col-lg-3 col-md-3 col-sm-3 mt-40">
                                         <!-- single-product-wrap start -->
                                         <div class="single-product-wrap">
                                             <div class="product-image">

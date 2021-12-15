@@ -87,15 +87,19 @@ class MainController extends Controller
             $item->shop_name = $item_shop->name;
         });
         foreach($book as $data)
-        $quantity_temp = $request->quantity;
-        if($quantity_temp <= 0){
-            return redirect()->route('view.book.item',$id)->with('message', 'Your quantity of purchase cannot be 0. Please choose quantity 1 to '.$data->quantity.' only. Thanks!');
-        }elseif($data->quantity >= $quantity_temp ){
-            $quantity = $quantity_temp;
-            $total = $request->quantity * $data->unit_price;
-            return view('billing',compact('book','quantity','total','category','shop'));
+        if($data->quantity == 0){
+            return redirect()->route('view.book.item',$id)->with('message', 'This book is not available this time! Sold Out.');
         }else{
-            return redirect()->route('view.book.item',$id)->with('message', 'Your quantity of purchase cannot be higher in the number of books for sale. Please choose quantity 1 to '.$data->quantity.' only. Thanks!');
+            $quantity_temp = $request->quantity;
+            if($quantity_temp <= 0){
+                return redirect()->route('view.book.item',$id)->with('message', 'Your quantity of purchase cannot be 0. Please choose quantity 1 to '.$data->quantity.' only. Thanks!');
+            }elseif($data->quantity >= $quantity_temp ){
+                $quantity = $quantity_temp;
+                $total = $request->quantity * $data->unit_price;
+                return view('billing',compact('book','quantity','total','category','shop'));
+            }else{
+                return redirect()->route('view.book.item',$id)->with('message', 'Your quantity of purchase cannot be higher in the number of books for sale. Please choose quantity 1 to '.$data->quantity.' only. Thanks!');
+            }
         }
         
     }

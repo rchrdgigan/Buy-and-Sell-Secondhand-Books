@@ -7,6 +7,8 @@ use App\Models\Category;
 use App\Models\Shop;
 use App\Models\ReportInfo;
 use App\Models\AssignReportedUser;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\UserRegistration;
 
 use Illuminate\Http\Request;
 
@@ -26,6 +28,15 @@ class AccountManagementController extends Controller
                 'status' => $status_code,
             ]);
             if($update_user){
+                $user = User::where("id",$user_id)->first();
+                $registrationData = [
+                    'body' => 'You recieve an new message notification!',
+                    'registrationText' => 'Thank you for registering your account at our website, Admin has alredy approve your registration.',
+                    'url' => url('/login'),
+                    'thankyou' => 'Thanks for your kindly waiting!'
+                ];
+                // $user->notify(new UserRegistration($registrationData));
+                Notification::send($user, new UserRegistration($registrationData));
                 return redirect()->route('admin.users')->with('success_message', 'Update status successfully!');
             }
             return redirect()->route('admin.users')->with('error_message', 'Updated status unsuccessfully!');

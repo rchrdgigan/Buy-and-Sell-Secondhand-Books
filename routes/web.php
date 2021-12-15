@@ -113,3 +113,10 @@ Route::get('/contact', function () {
     $shop = Shop::with('shop_book')->get();
     return view('contact-us',compact('category','shop'));
 })->name('contact');
+
+Route::get('/about', function () {
+    //Initializing caterogry and shop
+    $category = Category::with('assign_book_category')->get();
+    $shop = Shop::with('shop_book')->get();
+    return view('about-shopping',compact('category','shop'));
+})->name('about');

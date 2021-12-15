@@ -11,6 +11,9 @@ use App\Models\Transaction;
 use App\Models\UserTransaction;
 use App\Models\CartBook;
 use App\Models\UserShop;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\TransactionOrder;
+use App\Notifications\TransactionCustomer;
 
 use Illuminate\Http\Request;
 
@@ -146,17 +149,21 @@ class ShopController extends Controller
             $item->shop_name = $item_shop->name;
         });
         foreach($book as $data)
-        $quantity_temp = $request->quantity;
-        if($quantity_temp <= 0){
-            return redirect()->route('cart')->with('message', 'Your quantity of purchase cannot be 0. Please choose quantity 1 to '.$data->quantity.' only. Thanks!');
-        }elseif($data->quantity >= $quantity_temp ){
-            $cart = Cart::findOrfail($request->id);
-            $cart->delete();
-            $quantity = $quantity_temp;
-            $total = $request->quantity * $data->unit_price;
-            return view('billing',compact('book','quantity','total','category','shop'));
+        if($data->quantity == 0){
+            return redirect()->route('cart')->with('message', 'This book is not available this time! Sold Out.');
         }else{
-            return redirect()->route('cart')->with('message', 'Your quantity of purchase cannot be higher in the number of books for sale. Please choose quantity 1 to '.$data->quantity.' only. Thanks!');
+            $quantity_temp = $request->quantity;
+            if($quantity_temp <= 0){
+                return redirect()->route('cart')->with('message', 'Your quantity of purchase cannot be 0. Please choose quantity 1 to '.$data->quantity.' only. Thanks!');
+            }elseif($data->quantity >= $quantity_temp ){
+                $cart = Cart::findOrfail($request->id);
+                $cart->delete();
+                $quantity = $quantity_temp;
+                $total = $request->quantity * $data->unit_price;
+                return view('billing',compact('book','quantity','total','category','shop'));
+            }else{
+                return redirect()->route('cart')->with('message', 'Your quantity of purchase cannot be higher in the number of books for sale. Please choose quantity 1 to '.$data->quantity.' only. Thanks!');
+            }
         }
     }
 
@@ -198,10 +205,31 @@ class ShopController extends Controller
             ]);
             $user_trasaction = UserTransaction::create([
                 'transaction_id' => $transaction->id,
-                'user_id' => auth()->user()->id,
-                'shop_id' => $request->shop_id,
+                'user_id' => auth()->user()->id, //auth user or buyer
+                'shop_id' => $request->shop_id, //shop seller
                 'book_id' => $request->book_id,
             ]);
+
+            $user = User::where("id",auth()->user()->id)->first();
+            $transData = [
+                'body' => 'You recieve an new message notification!',
+                'transText' => 'Your order number: '. str_pad($transaction->id, 6, '0', STR_PAD_LEFT) .' is successfully placed. We received your transaction oder and it will begin processing it soon.',
+                'url' => url('/user/my-purchase'),
+                'thankyou' => 'Please wait until the seller confirm you transaction order. Thank you!'
+            ];
+            Notification::send($user, new TransactionOrder($transData));
+
+            $user_shop = UserShop::where('shop_id', $request->shop_id)->first();
+            $user_shop_id = User::where("id",$user_shop->user_id)->first();
+            $custData = [
+                'body' => 'You recieve an new message notification!',
+                'custText' => 'Good day! You have customer the order number: '. str_pad($transaction->id, 6, '0', STR_PAD_LEFT) .' waiting for your item confirmation.',
+                'url' => url('/user/myshop/customer'),
+                'thankyou' => 'Please contact the buyer and set approved to be process. Thank you!'
+            ];
+            
+            Notification::send($user_shop_id, new TransactionCustomer($custData));
+
             return redirect()->route('book.transaction');
         }else{
             //You're not allow to buy your own book
@@ -211,33 +239,41 @@ class ShopController extends Controller
     
     public function showCustomer()
     {
-        $shop_user = UserShop::where('user_id', auth()->user()->id)->first();
-        $customer = UserTransaction::with('transaction')->where('shop_id', $shop_user->shop_id)->get();
-        $customer->map(function($item_customer){
-            $customer_info = User::findOrFail($item_customer->user_id);
-            $item_customer->user_image = $customer_info->image;
-            $item_customer->first_name = $customer_info->first_name;
-            $item_customer->middle_name = $customer_info->middle_name;
-            $item_customer->last_name = $customer_info->last_name;
-            $item_customer->gender = $customer_info->gender;
-            $item_customer->brgy = $customer_info->brgy;
-            $item_customer->street = $customer_info->street;
-            $item_customer->purok = $customer_info->purok;
-            $item_customer->email = $customer_info->email;
-            $item_customer->contact = $customer_info->contact;
-            $customer_order = Book::findOrFail($item_customer->book_id);
-            $item_customer->image = $customer_order->image;
-            $item_customer->available = $customer_order->quantity;
-            $item_customer->details = $customer_order->details;
-            $item_customer->description = $customer_order->description;
-            $order = $item_customer->transaction;
-            $item_customer->book_title = $order->book_title;
-            $item_customer->unit_price = $order->unit_price;
-            $item_customer->quantity = $order->quantity;
-            $item_customer->total_price = $order->total_price;
-            $item_customer->status = $order->status;
-        });
-        return view('my-customer-list',compact('customer'));
+        $shop = UserShop::where('user_id', auth()->user()->id)->first();
+        if(!$shop == null){
+            $shop_info = Shop::where('id', $shop->shop_id)->first();
+             
+            $shop_user = UserShop::where('user_id', auth()->user()->id)->first();
+            $customer = UserTransaction::with('transaction')->where('shop_id', $shop_user->shop_id)->get();
+            $customer->map(function($item_customer){
+                $customer_info = User::findOrFail($item_customer->user_id);
+                $item_customer->user_image = $customer_info->image;
+                $item_customer->first_name = $customer_info->first_name;
+                $item_customer->middle_name = $customer_info->middle_name;
+                $item_customer->last_name = $customer_info->last_name;
+                $item_customer->gender = $customer_info->gender;
+                $item_customer->brgy = $customer_info->brgy;
+                $item_customer->street = $customer_info->street;
+                $item_customer->purok = $customer_info->purok;
+                $item_customer->email = $customer_info->email;
+                $item_customer->contact = $customer_info->contact;
+                $customer_order = Book::findOrFail($item_customer->book_id);
+                $item_customer->image = $customer_order->image;
+                $item_customer->available = $customer_order->quantity;
+                $item_customer->details = $customer_order->details;
+                $item_customer->description = $customer_order->description;
+                $order = $item_customer->transaction;
+                $item_customer->book_title = $order->book_title;
+                $item_customer->unit_price = $order->unit_price;
+                $item_customer->quantity = $order->quantity;
+                $item_customer->total_price = $order->total_price;
+                $item_customer->status = $order->status;
+            });
+            return view('my-customer-list',compact('customer','shop_info','shop'));
+        }else{
+            return view('my-customer-list', compact('shop'));
+        }
+       
     }
 
     //Update status to processing
@@ -257,34 +293,40 @@ class ShopController extends Controller
     //Display inprocessing
     public function displayInprocess()
     {
-        $shop_user = UserShop::where('user_id', auth()->user()->id)->first();
-        $customer = UserTransaction::with('transaction')->where('shop_id', $shop_user->shop_id)->get();
-        $customer->map(function($item_customer){
-            $customer_info = User::findOrFail($item_customer->user_id);
-            $item_customer->user_image = $customer_info->image;
-            $item_customer->first_name = $customer_info->first_name;
-            $item_customer->middle_name = $customer_info->middle_name;
-            $item_customer->last_name = $customer_info->last_name;
-            $item_customer->gender = $customer_info->gender;
-            $item_customer->brgy = $customer_info->brgy;
-            $item_customer->street = $customer_info->street;
-            $item_customer->purok = $customer_info->purok;
-            $item_customer->email = $customer_info->email;
-            $item_customer->contact = $customer_info->contact;
-            $customer_order = Book::findOrFail($item_customer->book_id);
-            $item_customer->image = $customer_order->image;
-            $item_customer->available = $customer_order->quantity;
-            $item_customer->details = $customer_order->details;
-            $item_customer->description = $customer_order->description;
-            $order = $item_customer->transaction;
-            $item_customer->book_title = $order->book_title;
-            $item_customer->unit_price = $order->unit_price;
-            $item_customer->quantity = $order->quantity;
-            $item_customer->total_price = $order->total_price;
-            $item_customer->status = $order->status;
-            $item_customer->reason = $order->reason;
-        });
-        return view('transaction-purchase-inprocess',compact('customer'));
+        $shop = UserShop::where('user_id', auth()->user()->id)->first();
+        if(!$shop == null){
+            $shop_info = Shop::where('id', $shop->shop_id)->first();
+            $shop_user = UserShop::where('user_id', auth()->user()->id)->first();
+            $customer = UserTransaction::with('transaction')->where('shop_id', $shop_user->shop_id)->get();
+            $customer->map(function($item_customer){
+                $customer_info = User::findOrFail($item_customer->user_id);
+                $item_customer->user_image = $customer_info->image;
+                $item_customer->first_name = $customer_info->first_name;
+                $item_customer->middle_name = $customer_info->middle_name;
+                $item_customer->last_name = $customer_info->last_name;
+                $item_customer->gender = $customer_info->gender;
+                $item_customer->brgy = $customer_info->brgy;
+                $item_customer->street = $customer_info->street;
+                $item_customer->purok = $customer_info->purok;
+                $item_customer->email = $customer_info->email;
+                $item_customer->contact = $customer_info->contact;
+                $customer_order = Book::findOrFail($item_customer->book_id);
+                $item_customer->image = $customer_order->image;
+                $item_customer->available = $customer_order->quantity;
+                $item_customer->details = $customer_order->details;
+                $item_customer->description = $customer_order->description;
+                $order = $item_customer->transaction;
+                $item_customer->book_title = $order->book_title;
+                $item_customer->unit_price = $order->unit_price;
+                $item_customer->quantity = $order->quantity;
+                $item_customer->total_price = $order->total_price;
+                $item_customer->status = $order->status;
+                $item_customer->reason = $order->reason;
+            });
+            return view('transaction-purchase-inprocess',compact('customer','shop_info','shop'));
+        }else{
+            return view('transaction-purchase-inprocess', compact('shop'));
+        }
     }
 
     public function finishTransaction(Request $request)

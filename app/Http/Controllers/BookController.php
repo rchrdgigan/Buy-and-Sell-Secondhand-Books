@@ -7,26 +7,33 @@ use App\Models\ShopBookCategory;
 use App\Models\AssignBookCategory;
 use App\Models\Category;
 use App\Models\Book;
+use App\Models\Shop;
 use Illuminate\Http\Request;
 
 class BookController extends Controller
 {
     public function index()
     {
-        $book = ShopBook::where('user_id', auth()->user()->id)->get();
-        $book->map(function($itemBook){
-            $my_book = Book::findOrFail($itemBook->book_id);
-            $itemBook->name = $my_book->name;
-            $itemBook->description = $my_book->description;
-            $itemBook->details = $my_book->details;
-            $itemBook->quantity = $my_book->quantity;
-            $itemBook->category = $my_book->category;
-            $itemBook->unit_price = $my_book->unit_price;
-            $itemBook->total_amount = $my_book->total_amount;
-            $itemBook->image = $my_book->image;
-        });
-        $category = Category::get();
-        return view('add-to-sell',compact('book','category'));
+        $shop = UserShop::where('user_id', auth()->user()->id)->first();
+        if(!$shop == null){
+            $shop_info = Shop::where('id', $shop->shop_id)->first();
+            $book = ShopBook::where('user_id', auth()->user()->id)->get();
+            $book->map(function($itemBook){
+                $my_book = Book::findOrFail($itemBook->book_id);
+                $itemBook->name = $my_book->name;
+                $itemBook->description = $my_book->description;
+                $itemBook->details = $my_book->details;
+                $itemBook->quantity = $my_book->quantity;
+                $itemBook->category = $my_book->category;
+                $itemBook->unit_price = $my_book->unit_price;
+                $itemBook->total_amount = $my_book->total_amount;
+                $itemBook->image = $my_book->image;
+            });
+            $category = Category::get();
+            return view('add-to-sell',compact('book','category','shop_info','shop'));
+        }else{
+            return view('my-shop', compact('shop'));
+        }
     }
 
     public function create(Request $request)

@@ -55,7 +55,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                        @foreach($user_order->where('status','canceled') as $data)
+                        @foreach($user_order->where('status','canceled')->sortDesc() as $data)
                             <tr>
                                 <td><a href="#"><img height="75" src="/public/book_image/{{$data->image}}"></a></td>
                                 <td><a href="#">{{$data->book_title}}</a></td>

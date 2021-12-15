@@ -23,18 +23,31 @@
         <div class="col-md-3">
             <div class="card">
                 <ul class="list-group list-group-unbordered">
-                <li class="list-group-item">
+                    <li class="list-group-item">
                         <a href="{{route('my.shop')}}" class="btn btn-warning btn-block"><b>Shop Setting</b></a>
                     </li>
-                    <li class="list-group-item">
-                        <a href="{{route('sell.book')}}" class="btn btn-warning btn-block"><b>My Books</b></a>
-                    </li>
-                    <li class="list-group-item">
-                        <a href="{{route('view.customer.list')}}" class="btn btn-warning btn-block"><b>My Customer</b></a>
-                    </li>
-                    <li class="list-group-item">
-                        <a href="{{route('display.processing')}}" class="btn btn-warning btn-block"><b>Transaction History</b></a>
-                    </li>
+                    @if($shop == null)
+                        <li class="list-group-item">
+                            <a href="" class="btn btn-warning btn-block disabled"><b>My Books</b></a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="" class="btn btn-warning btn-block disabled"><b>My Customer</b></a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="" class="btn btn-warning btn-block disabled"><b>Transaction History</b></a>
+                        </li>
+                    @else
+                        <li class="list-group-item">
+                            <a href="{{route('sell.book')}}" class="btn btn-warning btn-block"><b>My Books</b></a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="{{route('view.customer.list')}}" class="btn btn-warning btn-block"><b>My Customer</b></a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="{{route('display.processing')}}" class="btn btn-warning btn-block"><b>Transaction History</b></a>
+                        </li>
+                    @endif
+
                 </ul>
             </div>
         </div>
@@ -55,7 +68,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                        @forelse($customer->where('status', '<>' , 'pending') as $data)
+                        @forelse($customer->where('status', '<>' , 'pending')->sortDesc() as $data)
                             <tr>
                                 <td><img height="75" src="/public/book_image/{{$data->image}}"></td>
                                 <td><span>{{$data->book_title}}</a></td>

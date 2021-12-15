@@ -27,12 +27,12 @@
                             <div class="product-area shop-product-area">
                                 <div class="row">
                                 @foreach($book as $data)
-                                    <div class="col-lg-4 col-md-4 col-sm-6 mt-40">
+                                    <div class="col-lg-3 col-md-3 col-sm-4 mt-40">
                                         <!-- single-product-wrap start -->
                                         <div class="single-product-wrap">
                                             <div class="product-image">
                                                 <a href="{{route('view.book.item',$data->id)}}">
-                                                    <img height="300" src="/public/book_image/{{$data->image}}">
+                                                    <img height="250" src="/public/book_image/{{$data->image}}">
                                                 </a>
                                             </div>
                                             <div class="product_desc">

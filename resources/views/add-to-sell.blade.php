@@ -26,15 +26,28 @@
                     <li class="list-group-item">
                         <a href="{{route('my.shop')}}" class="btn btn-warning btn-block"><b>Shop Setting</b></a>
                     </li>
-                    <li class="list-group-item">
-                        <a href="{{route('sell.book')}}" class="btn btn-warning btn-block"><b>My Books</b></a>
-                    </li>
-                    <li class="list-group-item">
-                        <a href="{{route('view.customer.list')}}" class="btn btn-warning btn-block"><b>My Customer</b></a>
-                    </li>
-                    <li class="list-group-item">
-                        <a href="{{route('display.processing')}}" class="btn btn-warning btn-block"><b>Transaction History</b></a>
-                    </li>
+                    @if($shop == null)
+                        <li class="list-group-item">
+                            <a href="" class="btn btn-warning btn-block disabled"><b>My Books</b></a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="" class="btn btn-warning btn-block disabled"><b>My Customer</b></a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="" class="btn btn-warning btn-block disabled"><b>Transaction History</b></a>
+                        </li>
+                    @else
+                      <li class="list-group-item">
+                          <a href="{{route('sell.book')}}" class="btn btn-warning btn-block"><b>My Books</b></a>
+                      </li>
+                      <li class="list-group-item">
+                          <a href="{{route('view.customer.list')}}" class="btn btn-warning btn-block"><b>My Customer</b></a>
+                      </li>
+                      <li class="list-group-item">
+                          <a href="{{route('display.processing')}}" class="btn btn-warning btn-block"><b>Transaction History</b></a>
+                      </li>
+                    @endif
+
                 </ul>
             </div>
         </div>
@@ -59,7 +72,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                        @foreach($book as $data)
+                        @foreach($book->sortDesc() as $data)
                             <tr>
                                 <td>
                                     <a type="button" class="btn btn-danger open-AddBookDialog" data-id="{{$data->id}}" data-toggle="modal" data-target="#delBook">

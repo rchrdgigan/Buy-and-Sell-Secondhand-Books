@@ -44,9 +44,10 @@
                     <h5>Customer's List</h5>
                 </div>
                 <div class="card-body">
-                    @forelse($customer->where('status', 'pending') as $data)
+                    
                     
                     <div class="row">
+                    @forelse($customer->where('status', 'pending') as $data)
                         <div class="col-md-6 col-lg-4 col-sm-12">
                             <div class="card">
                                 <div class="card-body">
@@ -85,14 +86,14 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    @empty
-                    <div class="row">
-                        <div class="col-12">
-                            <h4>No Customer Found!</h4>
+                        @empty
+                        <div class="row">
+                            <div class="col-12">
+                                <h4>No Customer Found!</h4>
+                            </div>
                         </div>
+                        @endforelse
                     </div>
-                    @endforelse
                 </div>
             </div>
         </div>

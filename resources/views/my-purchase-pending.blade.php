@@ -44,7 +44,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($user_order->where('status','pending') as $data)
+                            @foreach($user_order->where('status','pending')->sortDesc() as $data)
                             <tr>
                                 <td>
                                     <a type="button" class="btn btn-danger" id="{{$data->id}}" data-toggle="modal" data-target="#cancelBok">
