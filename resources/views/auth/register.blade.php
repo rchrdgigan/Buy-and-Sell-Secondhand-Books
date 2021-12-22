@@ -107,7 +107,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="street" class="col-md-4 col-form-label text-md-right">{{ __('Street') }}</label>
+                            <label for="street" class="col-md-4 col-form-label text-md-right">{{ __('House No. / Street') }}</label>
 
                             <div class="col-md-6">
                                 <input id="street" type="text" class="form-control @error('street') is-invalid @enderror" name="street" value="{{ old('street') }}" required autocomplete="street" autofocus>
