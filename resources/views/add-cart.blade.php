@@ -25,7 +25,7 @@
                                 @foreach($cart as $data)
                                 <tr>
                                     <td class="li-product-remove"><a id="{{$data->id}}" data-toggle="modal" data-target="#delCart"><i class="fa fa-times"></i></a></td>
-                                    <td class="li-product-thumbnail"><a href="#"><img height="75" src="/storage/book_image/{{$data->image}}"></a></td>
+                                    <td class="li-product-thumbnail"><a href="#"><img height="75" src="/public/book_image/{{$data->image}}"></a></td>
                                     <td class="li-product-name"><a href="#">{{$data->name}}</a></td>
                                     <td class="li-product-price"><span class="amount" >{{$data->unit_price}}</span></td>
                                     <td class="li-product-price">
